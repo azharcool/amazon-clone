@@ -1,0 +1,38 @@
+.main{
+    width: 100vw;
+    height: 60vh;
+    background: url('https://ik.imagekit.io/qcu6epm9oi/amazon-image/contact.jpg?updatedAt=1686228236850');
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+.test_1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 15%;
+    text-overflow: inherit;
+    color: rgb(194, 220, 29);
+}
+.whatsapp_float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+}
+
+.small_text{
+    padding-top: 50px;
+}
+.serv{
+    color: red;
+    text-decoration:underline
+}
