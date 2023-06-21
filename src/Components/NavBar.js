@@ -200,6 +200,7 @@ function NavBar() {
   const name = useSelector((state) => state.user.displayName);
   const dispatch = useDispatch();
   const cartCount = useSelector((state) => state.cart.count);
+
   const getLanguage = useSelector((state) => state.language.lang);
 
   const onSignOut = async () => {
@@ -336,13 +337,13 @@ function NavBar() {
           </div>
           {name ? (
             <div className={classes.headerButton} onClick={onSignOut}>
-              <Typography className={classes.text}>Hello {name}</Typography>
+              <Typography className={classes.text}>{t.hello} {name}</Typography>
               <Typography className={classes.text2}>Sign out</Typography>
             </div>
           ) : (
             <Link to="/Login" className={classes.linkBtn}>
               <div className={classes.headerButton}>
-                <Typography className={classes.text}>Hello Guest</Typography>
+                <Typography className={classes.text}>{t.hello} {t.guest}</Typography>
                 <Typography className={classes.text2}>Sign in</Typography>
               </div>
             </Link>

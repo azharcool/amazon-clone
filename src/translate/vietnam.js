@@ -1,6 +1,7 @@
 const vietnam = {
-    success: "成功",
-    hello: "你好",
+    success: "Thành công",
+    hello: "Xin chào",
+    guest: "Khách mời",
     signIn: "登入",
     emailOrMobileNumber: "电子邮件或手机号码",
     password: "密码",

@@ -1,6 +1,7 @@
 const chinese = {
   success: "成功",
   hello: "你好",
+  guest: "客人",
   signIn: "登入",
   emailOrMobileNumber: "电子邮件或手机号码",
   password: "密码",
