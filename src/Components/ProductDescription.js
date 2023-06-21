@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { Button,useTheme,useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import StarRatings from "react-star-ratings";
@@ -24,7 +24,13 @@ const useStyles = makeStyles({
     padding: "1rem",
   },
   addBanner: {
-    backgroundSize: "70vw 10vh",
+    backgroundSize: "100% 10vh",
+    backgroundRepeat: "no-repeat",
+    height: "10vh",
+    
+  },
+  mAddBanner: {
+    backgroundSize: "110vw 10vh",
     backgroundRepeat: "no-repeat",
     height: "10vh",
   },
@@ -51,10 +57,21 @@ const useStyles = makeStyles({
     height: "60vh",
     width: "22vw",
   },
+  mImage: {
+    height: "60vh",
+    width: "28vw",
+   
+  },
   productInfo: {
     display: "flex",
     marginTop: "2rem",
     justifyContent: "space-around",
+  },
+  mProductInfo:{
+    display: "flex",
+    marginTop: "2rem",
+    flexDirection: "column",
+    justifyContent: "center",
   },
   descriptionDiv: {
     width: "60vw",
@@ -79,6 +96,7 @@ const useStyles = makeStyles({
   offersDiv: {
     display: "flex",
     flexDirection: "column",
+    
   },
   offerTitle: {
     display: "flex",
@@ -97,13 +115,29 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
   },
+  mPrice: {
+    fontSize: "2rem",
+    display: "flex",
+    alignItems: "center",
+    fontWeight: "bold",
+  },
   taxes: {
     fontSize: "0.9rem",
+    margin: "0 0 0.5rem 0",
+  },
+  mTaxes: {
+    fontSize: "1.2rem",
     margin: "0 0 0.5rem 0",
   },
   rateCategory: {
     display: "flex",
     justifyContent: "space-between",
+  },
+  mRateCategory:{
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   divider: {
     margin: "0.5rem 0",
@@ -122,6 +156,18 @@ const useStyles = makeStyles({
       background: "#F7CA00",
     },
   },
+  mAddToCart: {
+    background: "#FFD814",
+    height: "4.2rem",
+    width: "30rem",
+    fontSize: "1.5rem",
+    textTransform: "none",
+    borderRadius: "0.5rem",
+    marginTop:"3rem",
+    "&:hover": {
+      background: "#F7CA00",
+    },
+  },
   linkStyle: {
     textDecoration: "none",
   },
@@ -130,6 +176,15 @@ const useStyles = makeStyles({
     display: "flex",
     width: "50%",
     justifyContent: "space-between",
+    paddingBottom: "5rem",
+  },
+  mQuantityDiv: {
+    marginTop: "3rem",
+    display: "flex",
+    flexDirection:"column",
+    width: "50%",
+    justifyContent: "center",
+    
     paddingBottom: "5rem",
   },
   select: {
@@ -141,6 +196,11 @@ const useStyles = makeStyles({
   },
 });
 const ProductDescription = () => {
+  const  theme = useTheme();
+
+  const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
+
+
   const { id } = useParams();
   const product = useSelector((state) => state.products[id - 1]);
   const [addBanner, setAddBanner] = useState(AddBanner4);
@@ -198,7 +258,145 @@ const ProductDescription = () => {
     <>
       {product && (
         <div className={classes.main}>
-          <a href="https://www.primevideo.com/" target="blank">
+         
+          {isMatch?
+            <>
+            <div>
+            <a  href="https://www.primevideo.com/" target="blank">
+            <div
+              className={classes.mAddBanner}
+              style={{ backgroundImage: `url(${addBanner})` }}
+            ></div>
+          </a>
+          <Link to="/" className={classes.link}>
+            <Button className={classes.backBtn}>
+              <BiChevronLeft /> <Typography>Back to products</Typography>
+            </Button>
+          </Link>
+            <div style={{display:"flex",justifyContent:"center"}}>
+              <Typography className={classes.title}>{product.title}</Typography>
+            </div>
+              <div className={classes.mRateCategory}>
+                {product.rating && (
+                  <span
+                    title={product.rating.rate + " out of 5"}
+                    className={classes.rating}
+                  >
+                    <StarRatings
+                      rating={product.rating.rate}
+                      starRatedColor="#FFA41C"
+                      numberOfStars={5}
+                      name="rating"
+                      starDimension="1.2rem"
+                      starSpacing="0.15rem"
+                    />
+                    <Typography className={classes.count}>
+                      {product.rating.count}
+                    </Typography>
+                  </span>
+                )}
+                {product.category && (
+                  <Typography className={classes.category}>
+                    {capitalize(product.category)}
+                  </Typography>
+                )}
+              </div>
+            <div className={classes.mProductInfo}>
+            <div style={{display:"flex",justifyContent:"center",}}>
+            <img
+              src={product.image}
+              alt={product.title}
+              className={classes.mImage}
+            />
+            </div>
+
+             
+              <Divider className={classes.divider} />
+              <div style={{display:"flex",justifyContent:"center"}}>
+              <div  className={classes.priceDiv}>
+                <Typography className={classes.mPrice}>
+                  <BiRupee className={classes.rupee} />
+                  {rupeeCalculate(product.price * 79.67).toLocaleString()}
+                </Typography>
+                <Typography className={classes.mTaxes}>
+                  Inclusive of all taxes
+                </Typography>
+              </div>
+              </div>
+              <Divider className={classes.divider} />
+              <div style={{display:"flex",justifyContent:"center"}}>
+              <div className={classes.offersDiv}>
+                <Typography className={classes.offerTitle}>
+                  <TbDiscount2 className={classes.offerIcon} /> Offers
+                </Typography>
+                <Offers />
+              </div>
+              </div>
+              
+              <Divider className={classes.divider} />
+              <div style={{display:"flex",justifyContent:"center"}}>
+              <ProductDeliveryOptions />
+              </div>
+              <Divider className={classes.divider} />
+              <div style={{display:"flex",justifyContent:"center",paddingLeft:"5rem"}}>
+              <div className={classes.descriptionDiv}>
+                <Typography className={classes.description}>
+                  About this item
+                </Typography>
+
+                {descriptionArray(product.description).map((items, i) => {
+                  items =
+                    items.charAt(0).toUpperCase() +
+                    items.substring(1, items.length);
+                  return (
+                    items.length > 2 && (
+                      <Typography key={i}>• {items}</Typography>
+                    )
+                  );
+                })}
+              </div>
+              </div>
+             
+              
+              <Divider className={classes.divider} />
+              <div style={{display:"flex",justifyContent:"center"}}>
+              <div className={classes.mQuantityDiv}>
+                <div style={{ display: "flex", alignItems: "center",justifyContent:"center" }}>
+                  <Typography style={{fontSize:"1.2rem"}}>Quantity: </Typography>
+                  <select
+                    name="ItemQuantity"
+                    id="ItemQuantityId"
+                    className={classes.select}
+                    onChange={(e) => {
+                      setItemQuantity(e.target.value);
+                    }}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                  </select>
+                </div>
+                <Link to="AddedToCart" className={classes.linkStyle}>
+                <div style={{display:"flex",justifyContent:"center"}}>
+                  <Button className={classes.mAddToCart} onClick={addToCart}>
+                    Add to Cart
+                  </Button>
+                  </div>
+                </Link>
+              </div>
+              </div>
+            </div>
+          </div>
+            </>
+            :
+            <>
+            <a href="https://www.primevideo.com/" target="blank">
             <div
               className={classes.addBanner}
               style={{ backgroundImage: `url(${addBanner})` }}
@@ -209,7 +407,7 @@ const ProductDescription = () => {
               <BiChevronLeft /> <Typography>Back to products</Typography>
             </Button>
           </Link>
-          <div className={classes.productInfo}>
+            <div className={classes.productInfo}>
             <img
               src={product.image}
               alt={product.title}
@@ -310,6 +508,8 @@ const ProductDescription = () => {
               </div>
             </div>
           </div>
+            </>}
+         
         </div>
       )}
     </>
