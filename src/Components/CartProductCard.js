@@ -3,6 +3,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import RemoveItemFromCartAction from "./../Actions/RemoveItemFromCartAction";
 import UpdateProductAction from "./../Actions/UpdateProductAction";
+import {  useSelector } from "react-redux";
+import { translations } from "./../translate/translate";
 
 const useStyles = makeStyles({
   main: {
@@ -142,6 +144,7 @@ function CartProductCard(props) {
   const  theme = useTheme();
 
   const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
+  const getLanguage = useSelector((state) => state.language.lang);
   const { details } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -151,6 +154,7 @@ function CartProductCard(props) {
   const deleteFromCart = () => {
     dispatch(RemoveItemFromCartAction(details.id, details.quantity));
   };
+  const t = translations.get(getLanguage);
   return (
     <Card className={classes.main}>
     {isMatch?<div className={classes.div}><img src={details.image} alt="" className={classes.cImage} />

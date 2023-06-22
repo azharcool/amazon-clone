@@ -300,11 +300,11 @@ function NavBar() {
             <DialogTitle>{t.success}</DialogTitle>
             <DialogContent>
               <Typography style={{ whiteSpace: "pre-line" }}>
-                You have been Logged out successfully!
+                {t.youHaveBeenLoggedOutSucessfully}
               </Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Okay</Button>
+              <Button onClick={handleClose}>{t.okay}</Button>
             </DialogActions>
           </Dialog>
           <Link to="/">

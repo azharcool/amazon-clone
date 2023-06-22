@@ -14,6 +14,8 @@ import { FaCheckCircle } from "react-icons/fa";
 import CheckoutButton from "./CheckoutButton";
 import ClearCartAction from "./../Actions/ClearCartAction";
 
+import { translations } from "./../translate/translate";
+
 const useStyles = makeStyles({
   main: {
     background: "#EAEDED",
@@ -264,6 +266,7 @@ const useStyles = makeStyles({
   },
 });
 function Cart() {
+  const getLanguage = useSelector((state) => state.language.lang);
   const theme = useTheme();
 
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
@@ -286,6 +289,7 @@ function Cart() {
     //dispatch action clear cart
     dispatch(ClearCartAction());
   };
+  const t = translations.get(getLanguage);
   return (
     <div className={classes.main}>
     {isMatch ?

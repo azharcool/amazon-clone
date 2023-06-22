@@ -17,6 +17,8 @@ import { sendEmailVerification } from "firebase/auth";
 import SignedInAction from "./../Actions/SignedInAction";
 import amazonLogo from "../Assets/images/amazonLogoBlack.png";
 import setUserAction from "../Actions/setUserAction";
+import {  useSelector } from "react-redux";
+import { translations } from "./../translate/translate";
 
 const useStyles = makeStyles({
   upperDiv: {
@@ -142,6 +144,7 @@ function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const getLanguage = useSelector((state) => state.language.lang);
   const handleClose = () => {
     setOpen(false);
   };
@@ -195,6 +198,7 @@ function SignUp() {
       setOpen(true);
     }
   };
+  const t = translations.get(getLanguage);
   return (
     <div className={classes.main}>
       <div className={classes.upperDiv}>
@@ -202,40 +206,40 @@ function SignUp() {
           <img src={amazonLogo} alt="" className={classes.image} />
         </Link>
         <div className={classes.formDiv}>
-          <Typography className={classes.heading}>Sign up</Typography>
+          <Typography className={classes.heading}>{t.signUp}</Typography>
           <form id="form">
-            <Typography className={classes.label}>Display Name</Typography>
+            <Typography className={classes.label}>{t.enterYourName}</Typography>
             <input
               id="name"
               type="text"
               maxLength="10"
               className={classes.input}
               required
-              placeholder="Enter your name ( Max length is 10 characters )"
+              placeholder={t. enterYourNameMaxLength}
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
             />
             <Typography className={classes.label}>
-              Email or mobile phone number
+              {t.emailOrMobileNumber}
             </Typography>
             <input
               type="email"
               id="email"
               className={classes.input}
               required
-              placeholder="Enter your email"
+              placeholder={t.enterYouremail}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
-            <Typography className={classes.label}>Password</Typography>
+            <Typography className={classes.label}>{t.password}</Typography>
             <input
               type="password"
               id="password"
               required
               className={classes.input}
-              placeholder="Enter your password"
+              placeholder={t.enterYourPassword}
               onChange={(e) => {
                 setPass(e.target.value);
               }}
@@ -245,25 +249,25 @@ function SignUp() {
               className={classes.submitBtn}
               onClick={createNewAccount}
             >
-              Create your Amazon account
+              {t.createYourAmazonAccount}
             </button>
           </form>
           <Typography className={classes.conditions}>
-            By continuing, you agree to Amazon's{" "}
+            {t.byContinueYouAgreeToAmazonCondition}{" "}
             <a
               href="https://www.amazon.in/gp/help/customer/display.html?ie=UTF8&nodeId=200545940"
               target="blank"
               className={classes.link}
             >
-              Conditions of Use
+              {t.conditionOfUse}
             </a>{" "}
-            and{" "}
+            {t.and}{" "}
             <a
               href="https://www.amazon.in/gp/help/customer/display.html?ie=UTF8&nodeId=200534380"
               target="blank"
               className={classes.link}
             >
-              Privacy Notice
+              {t.privacyNotice}
             </a>
             .
           </Typography>
@@ -273,10 +277,10 @@ function SignUp() {
           textAlign="center"
           sx={{ borderBottomWidth: "50px" }}
         >
-          Already a Member?
+          {t.alreadyaMember}
         </Divider>
         <Link to="/Login">
-          <button className={classes.createNewAccountbutton}>Sign In</button>
+          <button className={classes.createNewAccountbutton}>{t.signIn}</button>
         </Link>
       </div>
       <Dialog
@@ -290,7 +294,7 @@ function SignUp() {
           <Typography style={{ whiteSpace: "pre-line" }}>{error}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Okay</Button>
+          <Button onClick={handleClose}>{t.okay}</Button>
         </DialogActions>
       </Dialog>
       <div className={classes.lowerDiv}>
@@ -300,25 +304,25 @@ function SignUp() {
             target="blank"
             className={classes.link}
           >
-            Conditions of Use
+              {t.conditionOfUse}
           </a>
           <a
             href="https://www.amazon.in/gp/help/customer/display.html?ie=UTF8&nodeId=200534380"
             target="blank"
             className={classes.link}
           >
-            Privacy Notice
+            {t.privacyNotice}
           </a>
           <a
             href="https://www.amazon.in/gp/help/customer/display.html?ie=UTF8&nodeId=508510"
             target="blank"
             className={classes.link}
           >
-            Help
+            {t.help}
           </a>
         </div>
         <Typography className={classes.copyright}>
-          © 1996-2022, Amazon.com, Inc. or its affiliates
+         {t.AmazoncomIncoritsAffiliates}
         </Typography>
       </div>
     </div>

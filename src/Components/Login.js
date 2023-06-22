@@ -14,6 +14,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import setUserAction from "../Actions/setUserAction";
 import SignedInAction from "./../Actions/SignedInAction";
+import {  useSelector } from "react-redux";
+import { translations } from "./../translate/translate";
 
 const useStyles = makeStyles({
   upperDiv: {
@@ -177,10 +179,13 @@ function Login() {
   };
 
   const [open, setOpen] = React.useState(false);
+  const getLanguage = useSelector((state) => state.language.lang);
 
   const handleClose = () => {
     setOpen(false);
   };
+  const t = translations.get(getLanguage);
+  
 
   return (
     <div className={classes.main}>
@@ -189,28 +194,28 @@ function Login() {
           <img src={amazonLogo} alt="" className={classes.image} />
         </Link>
         <div className={classes.formDiv}>
-          <Typography className={classes.heading}>Sign in </Typography>
+          <Typography className={classes.heading}>{t.signIn} </Typography>
           <form id="form">
             <Typography className={classes.label}>
-              Email or mobile phone number
+              {t.emailOrMobileNumber}
             </Typography>
             <input
               type="email"
               id="email"
               className={classes.input}
               required
-              placeholder="Enter your email"
+              placeholder={t.enterYouremail}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
-            <Typography className={classes.label}>Password</Typography>
+            <Typography className={classes.label}>{t.password}</Typography>
             <input
               type="password"
               id="password"
               required
               className={classes.input}
-              placeholder="Enter your password"
+              placeholder={t.enterYourPassword}
               onChange={(e) => {
                 setPass(e.target.value);
               }}
@@ -220,25 +225,25 @@ function Login() {
               className={classes.submitBtn}
               onClick={signIn}
             >
-              Sign in
+              {t.signIn}
             </button>
           </form>
           <Typography className={classes.conditions}>
-            By continuing, you agree to Amazon's{" "}
+            {t.byContinueYouAgreeToAmazonCondition}{" "}
             <a
               href="https://www.amazon.in/gp/help/customer/display.html?ie=UTF8&nodeId=200545940"
               target="blank"
               className={classes.link}
             >
-              Conditions of Use
+              {t.conditionOfUse}
             </a>{" "}
-            and{" "}
+            {t.and}{" "}
             <a
               href="https://www.amazon.in/gp/help/customer/display.html?ie=UTF8&nodeId=200534380"
               target="blank"
               className={classes.link}
             >
-              Privacy Notice
+              {t.privacyNotice}
             </a>
             .
           </Typography>
@@ -248,11 +253,11 @@ function Login() {
           textAlign="center"
           sx={{ borderBottomWidth: "50px" }}
         >
-          New to Amazon?
+          {t.newToAmazon}
         </Divider>
         <Link to="/SignUp">
           <button className={classes.createNewAccountbutton}>
-            Create your Amazon account
+            {t.createYourAmazonAccount}
           </button>
         </Link>
       </div>
@@ -267,7 +272,7 @@ function Login() {
           <Typography style={{ whiteSpace: "pre-line" }}>{error}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Okay</Button>
+          <Button onClick={handleClose}>{t.okay}</Button>
         </DialogActions>
       </Dialog>
       <div className={classes.lowerDiv}>
@@ -277,25 +282,25 @@ function Login() {
             target="blank"
             className={classes.link}
           >
-            Conditions of Use
+            {t.conditionOfUse}
           </a>
           <a
             href="https://www.amazon.in/gp/help/customer/display.html?ie=UTF8&nodeId=200534380"
             target="blank"
             className={classes.link}
           >
-            Privacy Notice
+            {t.privacyNotice}
           </a>
           <a
             href="https://www.amazon.in/gp/help/customer/display.html?ie=UTF8&nodeId=508510"
             target="blank"
             className={classes.link}
           >
-            Help
+            {t.help}
           </a>
         </div>
         <Typography className={classes.copyright}>
-          © 1996-2022, Amazon.com, Inc. or its affiliates
+          {t.AmazoncomIncoritsAffiliates}
         </Typography>
       </div>
     </div>
