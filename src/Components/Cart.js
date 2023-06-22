@@ -9,6 +9,8 @@ import { FaCheckCircle } from "react-icons/fa";
 import CheckoutButton from "./CheckoutButton";
 import ClearCartAction from "./../Actions/ClearCartAction";
 
+import { translations } from "./../translate/translate";
+
 const useStyles = makeStyles({
   main: {
     background: "#EAEDED",
@@ -123,6 +125,7 @@ const useStyles = makeStyles({
   },
 });
 function Cart() {
+  const getLanguage = useSelector((state) => state.language.lang);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -142,6 +145,7 @@ function Cart() {
     //dispatch action clear cart
     dispatch(ClearCartAction());
   };
+  const t = translations.get(getLanguage);
   return (
     <div className={classes.main}>
       <div className={classes.leftDiv}>
@@ -150,18 +154,18 @@ function Cart() {
             <img src={emptyCart} alt="" />
             <div>
               <Typography className={classes.noItems}>
-                Your Amazon Cart is empty
+                {t.yourAmazonCartIsEmpty}
               </Typography>
               <Link to="/" className={classes.link}>
                 <Typography className={classes.goToProducts}>
-                  Show Products
+                {t.showProducts}
                 </Typography>
               </Link>
             </div>
           </div>
         ) : (
           <div className={classes.innerleftDiv}>
-            <Typography className={classes.heading}>Shopping Cart</Typography>
+            <Typography className={classes.heading}>{t.ShoppingCart}</Typography>
             {cartItems.map((item, i) => {
               return (
                 <div key={i}>
@@ -172,7 +176,7 @@ function Cart() {
             })}
             <div className={classes.subTotal}>
               <Typography className={classes.subTotalText}>
-                Subtotal ({cartCount} items) :{" "}
+                {t.subTotal} ({cartCount} {t.item}) :{" "}
                 <b>₹ {calcTotal().toLocaleString()}</b>
               </Typography>
             </div>
@@ -188,16 +192,13 @@ function Cart() {
         >
           {cartItems.length !== 0 && (
             <Typography onClick={clearCart} className={classes.clearCart}>
-              Clear Cart
+              {t.clearCart}
             </Typography>
           )}
         </div>
         <Typography className={classes.footer}>
-          The price and availability of items at Amazon.in are subject to
-          change. The shopping cart is a temporary place to store a list of your
-          items and reflects each item's most recent price. Do you have a
-          promotional code? We'll ask you to enter your claim code when it's
-          time to pay.
+        {t.thePriceAndAvailabilityOfItem}
+          
         </Typography>
       </div>
       {cartItems.length !== 0 && (
@@ -206,21 +207,21 @@ function Cart() {
             <div style={{ display: "flex", alignItems: "center" }}>
               <FaCheckCircle className={classes.checkIcon} />
               <Typography className={classes.freeDelivery}>
-                Your order is eligible for FREE Delivery.
+                {t.yourOrderEligibleForFreeDelivery}
               </Typography>
             </div>
             <Typography className={classes.checkoutText}>
-              Select this option at checkout.{" "}
+              {t.selectThisOptionAtCheckout}{" "}
               <a
                 href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200904360&pop-up=1"
                 target="blank"
                 className={classes.checkoutLink}
               >
-                Details
+                {t.details}
               </a>
             </Typography>
             <Typography className={classes.subTotalText}>
-              Subtotal ({cartCount} items) :{" "}
+              {t.subTotal} ({cartCount} {t.item}) :{" "}
               <b>₹ {calcTotal().toLocaleString()}</b>
             </Typography>
             <CheckoutButton quantity={0} />
@@ -228,7 +229,7 @@ function Cart() {
           <div className={classes.lowerRightDiv}>
             <Link to="/" className={classes.link}>
               <Typography className={classes.continueShopping}>
-                Continue Shopping
+                {t.continueShopping}
               </Typography>
             </Link>
           </div>

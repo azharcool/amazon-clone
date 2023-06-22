@@ -10,3 +10,4 @@ export const translations = new Map([
   ["Chinese", chinese],
   ["Vietnam", vietnam],
 ]);
+
