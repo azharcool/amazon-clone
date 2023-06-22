@@ -88,114 +88,111 @@ function App() {
   }, [dispatch, signedIn]);
 
   return (
-    <div>
-      
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <NavBar />
-                <Home />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/Login"
-            element={
-              <>
-                <Login />
-              </>
-            }
-          />
-          <Route
-            path="/products"
-            exact
-            element={
-              <>
-                <NavBar />
-                <Home />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/products/:id"
-            exact
-            element={
-              <>
-                <NavBar />
-                <ProductDescription />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/Cart"
-            element={
-              <>
-                <NavBar />
-                <Cart />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/products/:id/AddedToCart"
-            exact
-            element={
-              <>
-                <NavBar />
-                <AddedToCart />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/Checkout-success"
-            exact
-            element={
-              <>
-                <NavBar />
-                <CheckoutSuccess />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/SignUp"
-            exact
-            element={
-              <>
-                <SignUp />
-              </>
-            }
-          />
-          <Route
-            path="*"
-            exact
-            element={
-              <>
-                <NotFound />
-              </>
-            }
-          />
-           <Route
-            path="/Contact"
-            exact
-            element={
-              <>
-                <NavBar />
-                <Contact />
-                <Footer />
-              </>
-            }
-          />
-        </Routes>
-      </Router>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <NavBar />
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/Login"
+          element={
+            <>
+              <Login />
+            </>
+          }
+        />
+        <Route
+          path="/products"
+          exact
+          element={
+            <>
+              <NavBar />
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/products/:id"
+          exact
+          element={
+            <>
+              <NavBar />
+              <ProductDescription />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/Cart"
+          element={
+            <>
+              <NavBar />
+              <Cart />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/products/:id/AddedToCart"
+          exact
+          element={
+            <>
+              <NavBar />
+              <AddedToCart />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/Checkout-success"
+          exact
+          element={
+            <>
+              <NavBar />
+              <CheckoutSuccess />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/SignUp"
+          exact
+          element={
+            <>
+              <SignUp />
+            </>
+          }
+        />
+        <Route
+          path="*"
+          exact
+          element={
+            <>
+              <NotFound />
+            </>
+          }
+        />
+        <Route
+          path="/Contact"
+          exact
+          element={
+            <>
+              <NavBar />
+              <Contact />
+              <Footer />
+            </>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 

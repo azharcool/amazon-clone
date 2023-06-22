@@ -31,7 +31,10 @@ const useStyles = makeStyles({
  
   toolbar: {
     margin: 0,
-    paddingLeft: "1rem",
+    // paddingLeft: "1rem",
+    padding: "0 1rem",
+    display:"flex",
+    justifyContent:"space-between"
   },
   logo: {
     width: "6.7rem",
@@ -115,7 +118,7 @@ const useStyles = makeStyles({
   mSearchbar: {
     width: "49vw",
     
-    marginLeft: "7rem",
+    // marginLeft: "7rem",
     height: "2.5rem",
     borderRadius: "0.3rem",
     borderTopRightRadius: 0,
@@ -174,7 +177,7 @@ const useStyles = makeStyles({
     fontSize: "0.9rem",
     textDecoration: "none",
     color: "white",
-    marginLeft: "5rem",
+    // marginLeft: "5rem",
     display: "flex",
     alignItems: "end",
   },
@@ -245,6 +248,7 @@ function NavBar() {
   const name = useSelector((state) => state.user.displayName);
   const dispatch = useDispatch();
   const cartCount = useSelector((state) => state.cart.count);
+
   const onSignOut = async () => {
     dispatch(setUserAction(initialUserState));
     dispatch(SignedInAction(false));
@@ -257,10 +261,11 @@ function NavBar() {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div className={classes.div}>
       <AppBar className={classes.appbar}>
-        <Toolbar className={classes.toolbar}>
+        <Toolbar className={classes.toolbar} disableGutters>
           <Dialog
             open={open}
             keepMounted

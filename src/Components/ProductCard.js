@@ -1,8 +1,14 @@
-import { Card, makeStyles, Typography,useTheme,useMediaQuery } from "@material-ui/core";
+import {
+  Card,
+  makeStyles,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
 import { Button } from "@material-ui/core";
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   main: {
     height: "58vh",
     width: "23vw",
@@ -13,6 +19,9 @@ const useStyles = makeStyles({
     marginTop: "2rem",
     borderRadius: "1rem",
     cursor: "pointer",
+    [theme.breakpoints.down('501')]: {
+      width: "60vw",
+    },
   },
   title: {
     height: "2rem",
@@ -22,14 +31,14 @@ const useStyles = makeStyles({
     textOverflow: "ellipsis",
     marginTop: "0.5rem",
   },
-  mTitle:{
+  mTitle: {
     height: "4rem",
     width: "90%",
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
     marginTop: "0.5rem",
-    fontSize: "1.9rem", 
+    fontSize: "1.9rem",
   },
   image: {
     height: "60%",
@@ -38,12 +47,12 @@ const useStyles = makeStyles({
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
   },
-  mImage:{
+  mImage: {
     height: "40%",
     width: "80%",
     marginTop: "0.5rem",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "100% 100%", 
+    backgroundSize: "100% 100%",
     marginBottom: "1rem",
   },
   footer: {
@@ -52,13 +61,12 @@ const useStyles = makeStyles({
     width: "90%",
     background: "transparent",
   },
-  mFooter:{
+  mFooter: {
     display: "flex",
-    flexDirection:"column",
+    flexDirection: "column",
     justifyContent: "space-between",
     width: "90%",
     background: "transparent",
-   
   },
   addToCart: {
     background: "#FEBD69",
@@ -84,7 +92,6 @@ const useStyles = makeStyles({
   rating: {
     display: "flex",
     alignItems: "center",
-    
   },
   count: {
     marginLeft: "0.5rem",
@@ -108,7 +115,7 @@ const useStyles = makeStyles({
       background: "#dcf4f7",
     },
   },
-  mHoverText:{
+  mHoverText: {
     position: "relative",
     top: "50%",
     border: "1px solid grey",
@@ -118,7 +125,7 @@ const useStyles = makeStyles({
     height: "2.5rem",
     borderRadius: "0.5rem",
     boxShadow: "0.5px 0.5px 2px 0px grey",
-   
+
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -126,15 +133,15 @@ const useStyles = makeStyles({
       background: "#dcf4f7",
     },
   },
-});
+}));
 const rupeeCalculate = (val) => {
   const dec = Math.floor(val);
   return dec;
 };
 const ProductCard = ({ item }) => {
-  const  theme = useTheme();
+  const theme = useTheme();
 
-  const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
+  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const onHover = () => {
@@ -145,88 +152,94 @@ const ProductCard = ({ item }) => {
     setHover(false);
   };
   return (
-    <Card 
+    <Card
       className={classes.main}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
     >
-    {isMatch ? 
-      <>
-      <div
-      
-        
-    
-      className={classes.mImage}
-      style={{ backgroundImage: `url(${item.image})` }}
-    >
-      {hover && (
-        <div className={classes.mHoverText}>
-          {" "}
-          <Typography>Quick Look</Typography>
-        </div>
+      {isMatch ? (
+        <>
+          <div
+            className={classes.mImage}
+            style={{ backgroundImage: `url(${item.image})` }}
+          >
+            {hover && (
+              <div className={classes.mHoverText}>
+                {" "}
+                <Typography>Quick Look</Typography>
+              </div>
+            )}
+          </div>
+          <Typography className={classes.mTitle}>{item.title}</Typography>
+          <div className={classes.mFooter}>
+            <Typography
+              style={{
+                fontSize: "1.8rem",
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
+              {" "}
+              ₹ {rupeeCalculate(item.price * 79.67).toLocaleString()}
+            </Typography>
+            <span
+              title={item.rating.rate + " out of 5"}
+              className={classes.rating}
+            >
+              <StarRatings
+                rating={item.rating.rate}
+                starRatedColor="#FFA41C"
+                numberOfStars={5}
+                name="rating"
+                starDimension="1.2rem"
+                starSpacing="0.15rem"
+              />
+              <Typography className={classes.count}>
+                {item.rating.count}
+              </Typography>
+            </span>
+          </div>
+          <Button className={classes.mAddToCart}>Show Now</Button>
+        </>
+      ) : (
+        <>
+          <div
+            className={classes.image}
+            style={{ backgroundImage: `url(${item.image})` }}
+          >
+            {hover && (
+              <div className={classes.hoverText}>
+                {" "}
+                <Typography>Quick Look</Typography>
+              </div>
+            )}
+          </div>
+          <Typography className={classes.title}>{item.title}</Typography>
+          <div className={classes.footer}>
+            <Typography>
+              {" "}
+              ₹ {rupeeCalculate(item.price * 79.67).toLocaleString()}
+            </Typography>
+            <span
+              title={item.rating.rate + " out of 5"}
+              className={classes.rating}
+            >
+              <StarRatings
+                rating={item.rating.rate}
+                starRatedColor="#FFA41C"
+                numberOfStars={5}
+                name="rating"
+                starDimension="1.2rem"
+                starSpacing="0.15rem"
+              />
+              <Typography className={classes.count}>
+                {item.rating.count}
+              </Typography>
+            </span>
+          </div>
+          <Button className={classes.addToCart}>Show Now</Button>
+        </>
       )}
-    </div>
-    <Typography className={classes.mTitle}>{item.title}</Typography>
-    <div className={classes.mFooter}>
-      <Typography style={{
-        fontSize:"1.8rem",
-        textAlign:"center",
-        fontWeight:"bold",
-    }}>
-        {" "}
-        ₹ {rupeeCalculate(item.price * 79.67).toLocaleString()}
-      </Typography>
-      <span title={item.rating.rate + " out of 5"} className={classes.rating}>
-        <StarRatings
-          rating={item.rating.rate}
-          starRatedColor="#FFA41C"
-          numberOfStars={5}
-          name="rating"
-          starDimension="1.2rem"
-          starSpacing="0.15rem"
-        />
-        <Typography className={classes.count}>{item.rating.count}</Typography>
-      </span>
-    </div>
-    <Button className={classes.mAddToCart}>Show Now</Button>
-      </>
-      :
-      <>
-      <div
-      
-        
-    
-      className={classes.image}
-      style={{ backgroundImage: `url(${item.image})` }}
-    >
-      {hover && (
-        <div className={classes.hoverText}>
-          {" "}
-          <Typography>Quick Look</Typography>
-        </div>
-      )}
-    </div>
-    <Typography className={classes.title}>{item.title}</Typography>
-    <div className={classes.footer}>
-      <Typography>
-        {" "}
-        ₹ {rupeeCalculate(item.price * 79.67).toLocaleString()}
-      </Typography>
-      <span title={item.rating.rate + " out of 5"} className={classes.rating}>
-        <StarRatings
-          rating={item.rating.rate}
-          starRatedColor="#FFA41C"
-          numberOfStars={5}
-          name="rating"
-          starDimension="1.2rem"
-          starSpacing="0.15rem"
-        />
-        <Typography className={classes.count}>{item.rating.count}</Typography>
-      </span>
-    </div>
-    <Button className={classes.addToCart}>Show Now</Button>
-      </>}
-     
     </Card>
   );
 };
