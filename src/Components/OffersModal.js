@@ -1,4 +1,4 @@
-import { Button, Divider, makeStyles, Typography } from "@material-ui/core";
+import { Button, Divider, makeStyles, Typography, } from "@material-ui/core";
 import React, { useState } from "react";
 import { BiChevronDown, BiChevronRight, BiChevronLeft } from "react-icons/bi";
 
@@ -194,6 +194,7 @@ const useStyles = makeStyles({
   },
 });
 export const NoCostEmiModal = (props) => {
+
   const classes = useStyles();
   const [FAQ, setFAQ] = useState(false);
   const [terms, setTerms] = useState(false);
@@ -214,6 +215,7 @@ export const NoCostEmiModal = (props) => {
   };
   return (
     <div>
+    
       <div className={classes.headerDiv}>
         <Typography className={classes.header}>No Cost EMI</Typography>
         <Button
