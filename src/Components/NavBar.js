@@ -1,5 +1,12 @@
 import React from "react";
-import { AppBar, Button,  Toolbar, Typography, useMediaQuery,useTheme } from "@material-ui/core";
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import amazonLogo from "../Assets/images/amazonLogo.png";
@@ -20,32 +27,26 @@ import SignedInAction from "../Actions/SignedInAction";
 import DrawerComp from "./DrawerComp";
 
 const useStyles = makeStyles({
-  div:{
-    width:"100%",
-
+  div: {
+    width: "100%",
   },
   appbar: {
     background: "#131921",
   },
-  
- 
+
   toolbar: {
     margin: 0,
     // paddingLeft: "1rem",
     padding: "0 1rem",
-    display:"flex",
-    justifyContent:"space-between"
+    display: "flex",
+    justifyContent: "space-between",
   },
   logo: {
     width: "6.7rem",
     height: "1.9rem",
     marginTop: "0.2rem",
-   
   },
 
-
-
-  
   location: {
     display: "flex",
     alignItems: "end",
@@ -61,7 +62,7 @@ const useStyles = makeStyles({
   },
   text: {
     fontSize: "0.7rem",
-    lineHeight: 0.5,    
+    lineHeight: 0.5,
     cursor: "pointer",
     color: "#CCCCCC",
   },
@@ -69,16 +70,14 @@ const useStyles = makeStyles({
     fontSize: "0.9rem",
     fontWeight: 500,
     cursor: "pointer",
-    
   },
   search: {
     display: "flex",
     alignItems: "center",
-    
   },
   searchbar: {
     width: "49vw",
-    
+
     marginLeft: "1rem",
     height: "2.5rem",
     borderRadius: "0.3rem",
@@ -90,7 +89,6 @@ const useStyles = makeStyles({
     "&:focus": {
       outline: "1px solid #FEBD69",
     },
-    
   },
   searchBtn: {
     width: "3rem",
@@ -112,12 +110,10 @@ const useStyles = makeStyles({
   mSearch: {
     display: "flex",
     alignItems: "center",
-    justifyContent:"center"
-    
+    justifyContent: "center",
   },
   mSearchbar: {
     width: "49vw",
-    
     // marginLeft: "7rem",
     height: "2.5rem",
     borderRadius: "0.3rem",
@@ -129,7 +125,6 @@ const useStyles = makeStyles({
     "&:focus": {
       outline: "1px solid #FEBD69",
     },
-    
   },
   mSearchBtn: {
     width: "3rem",
@@ -203,9 +198,7 @@ const useStyles = makeStyles({
   },
   cartIcon: {
     fontSize: "1.9rem",
-    
-  }
-  ,
+  },
   linkBtn: {
     textDecoration: "none",
     color: "white",
@@ -213,10 +206,10 @@ const useStyles = makeStyles({
 });
 
 function NavBar() {
-  const  theme = useTheme();
+  const theme = useTheme();
 
-  const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
- 
+  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
   const classes = useStyles();
   const initialUserState = {
     uid: "",
@@ -285,108 +278,117 @@ function NavBar() {
           <Link to="/">
             <img className={classes.logo} src={amazonLogo} alt="" />
           </Link>
-          
-            {isMatch ?
+
+          {isMatch ? (
             <>
-            <div className={classes.mSearch}>
-            <input type="text" className={classes.mSearchbar}></input>
-            <Button className={classes.mSearchBtn}>
-              <Search className={classes.mSearchIcon} />
-            </Button>
-          </div>
-          
-          <Link to="/Cart" className={classes.scart}>
-            <div className={classes.header_cart}>
-              <ShoppingCartOutlinedIcon className={classes.cartIcon} />
-              <p className={classes.cartItems}>{cartCount}</p>
-            </div>
-            Cart
-          </Link>
-            <DrawerComp style={{display:"flex",justifyContent:"right" ,alignItems:"right"}}/>
-            
-            </>
-            :
-            <>
-            <div className={classes.location} onClick={() => alert("Clicked")}>
-            <div>
-              <HiOutlineLocationMarker
-                size="1.15rem"
-                className={classes.icon}
-              />
-            </div>
-            <div>
-              <Typography className={classes.text}>Hello {name}</Typography>
-              <Typography className={classes.text2}>
-                Select your address
-              </Typography>
-            </div>
-            
-          </div>
-            
-            
-          <div className={classes.search}>
-            <input type="text" className={classes.searchbar}></input>
-            <Button className={classes.searchBtn}>
-              <Search className={classes.searchIcon} />
-            </Button>
-          </div>
-          <div className={classes.headerButton}>
-            <Typography className={classes.text}>English</Typography>
-            <Typography className={classes.flagDiv}>
-              <ReactCountryFlag countryCode="IN" svg className={classes.flag} />
-              <AiOutlineCaretDown className={classes.downIcon} />
-            </Typography>
-          </div>
-         
-          
- 
-          {name ? (
-            <div className={classes.headerButton} onClick={onSignOut}>
-              <Typography className={classes.text} >Hello {name}</Typography>
-              <Typography className={classes.text2}>Sign out</Typography>
-            </div>
-          ) : (
-            <Link to="/Login" className={classes.linkBtn}>
-              <div  className={classes.headerButton}>
-                <Typography sx={{
-                  fontSize: {
-                   
-                    md:"0.5rem",
-                    lg:"0.6rem",
-                    xl:"0.7rem"
-                  },
-                  
-                }} className={classes.text}>Hello Guest</Typography>
-                <Typography sx={{
-                  fontSize: {
-                   
-                    md:"0.7rem",
-                    lg:"0.8rem"
-                  },
-                  
-                }} className={classes.text2}>Sign in</Typography>
+              <div className={classes.mSearch}>
+                <input type="text" className={classes.mSearchbar}></input>
+                <Button className={classes.mSearchBtn}>
+                  <Search className={classes.mSearchIcon} />
+                </Button>
               </div>
-            </Link>
+
+              <Link to="/Cart" className={classes.scart}>
+                <div className={classes.header_cart}>
+                  <ShoppingCartOutlinedIcon className={classes.cartIcon} />
+                  <p className={classes.cartItems}>{cartCount}</p>
+                </div>
+                Cart
+              </Link>
+              <DrawerComp
+                style={{
+                  display: "flex",
+                  justifyContent: "right",
+                  alignItems: "right",
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <div
+                className={classes.location}
+                onClick={() => alert("Clicked")}
+              >
+                <div>
+                  <HiOutlineLocationMarker
+                    size="1.15rem"
+                    className={classes.icon}
+                  />
+                </div>
+                <div>
+                  <Typography className={classes.text}>Hello {name}</Typography>
+                  <Typography className={classes.text2}>
+                    Select your address
+                  </Typography>
+                </div>
+              </div>
+
+              <div className={classes.search}>
+                <input type="text" className={classes.searchbar}></input>
+                <Button className={classes.searchBtn}>
+                  <Search className={classes.searchIcon} />
+                </Button>
+              </div>
+              <div className={classes.headerButton}>
+                <Typography className={classes.text}>English</Typography>
+                <Typography className={classes.flagDiv}>
+                  <ReactCountryFlag
+                    countryCode="IN"
+                    svg
+                    className={classes.flag}
+                  />
+                  <AiOutlineCaretDown className={classes.downIcon} />
+                </Typography>
+              </div>
+
+              {name ? (
+                <div className={classes.headerButton} onClick={onSignOut}>
+                  <Typography className={classes.text}>Hello {name}</Typography>
+                  <Typography className={classes.text2}>Sign out</Typography>
+                </div>
+              ) : (
+                <Link to="/Login" className={classes.linkBtn}>
+                  <div className={classes.headerButton}>
+                    <Typography
+                      sx={{
+                        fontSize: {
+                          md: "0.5rem",
+                          lg: "0.6rem",
+                          xl: "0.7rem",
+                        },
+                      }}
+                      className={classes.text}
+                    >
+                      Hello Guest
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: {
+                          md: "0.7rem",
+                          lg: "0.8rem",
+                        },
+                      }}
+                      className={classes.text2}
+                    >
+                      Sign in
+                    </Typography>
+                  </div>
+                </Link>
+              )}
+
+              <div className={classes.headerButton}>
+                <Typography className={classes.text}>Returns</Typography>
+                <Typography className={classes.text2}>& Orders</Typography>
+              </div>
+              <Link to="/Cart" className={classes.cart}>
+                <div className={classes.header_cart}>
+                  <ShoppingCartOutlinedIcon className={classes.cartIcon} />
+                  <p className={classes.cartItems}>{cartCount}</p>
+                </div>
+                Cart
+              </Link>
+            </>
           )}
-
-          <div className={classes.headerButton}>
-            <Typography className={classes.text}>Returns</Typography>
-            <Typography className={classes.text2}>& Orders</Typography>
-          </div>
-          <Link to="/Cart" className={classes.cart}>
-            <div className={classes.header_cart}>
-              <ShoppingCartOutlinedIcon className={classes.cartIcon} />
-              <p className={classes.cartItems}>{cartCount}</p>
-            </div>
-            Cart
-          </Link>
-          </>
-        }
-
-          
-          
-          
-      
         </Toolbar>
       </AppBar>
     </div>
