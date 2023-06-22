@@ -240,11 +240,11 @@ function NavBar() {
             <DialogTitle>{t.success}</DialogTitle>
             <DialogContent>
               <Typography style={{ whiteSpace: "pre-line" }}>
-                You have been Logged out successfully!
+                {t.youHaveBeenLoggedOutSucessfully}
               </Typography>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Okay</Button>
+              <Button onClick={handleClose}>{t.okay}</Button>
             </DialogActions>
           </Dialog>
           <Link to="/">
@@ -336,28 +336,28 @@ function NavBar() {
           </div>
           {name ? (
             <div className={classes.headerButton} onClick={onSignOut}>
-              <Typography className={classes.text}>Hello {name}</Typography>
-              <Typography className={classes.text2}>Sign out</Typography>
+              <Typography className={classes.text}>{t.hello} {name}</Typography>
+              <Typography className={classes.text2}>{t.signOut}</Typography>
             </div>
           ) : (
             <Link to="/Login" className={classes.linkBtn}>
               <div className={classes.headerButton}>
-                <Typography className={classes.text}>Hello Guest</Typography>
-                <Typography className={classes.text2}>Sign in</Typography>
+                <Typography className={classes.text}>{t.helloGuest}</Typography>
+                <Typography className={classes.text2}>{t.signIn}</Typography>
               </div>
             </Link>
           )}
 
           <div className={classes.headerButton}>
-            <Typography className={classes.text}>Returns</Typography>
-            <Typography className={classes.text2}>& Orders</Typography>
+            <Typography className={classes.text}>{t.returns}</Typography>
+            <Typography className={classes.text2}>{t.orders}</Typography>
           </div>
           <Link to="/Cart" className={classes.cart}>
             <div className={classes.header_cart}>
               <ShoppingCartOutlinedIcon className={classes.cartIcon} />
               <p className={classes.cartItems}>{cartCount}</p>
             </div>
-            Cart
+            {t.cart}
           </Link>
         </Toolbar>
       </AppBar>

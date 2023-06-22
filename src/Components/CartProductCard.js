@@ -3,6 +3,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import RemoveItemFromCartAction from "./../Actions/RemoveItemFromCartAction";
 import UpdateProductAction from "./../Actions/UpdateProductAction";
+import {  useSelector } from "react-redux";
+import { translations } from "./../translate/translate";
 
 const useStyles = makeStyles({
   main: {
@@ -68,6 +70,7 @@ const useStyles = makeStyles({
   },
 });
 function CartProductCard(props) {
+  const getLanguage = useSelector((state) => state.language.lang);
   const { details } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -77,6 +80,7 @@ function CartProductCard(props) {
   const deleteFromCart = () => {
     dispatch(RemoveItemFromCartAction(details.id, details.quantity));
   };
+  const t = translations.get(getLanguage);
   return (
     <Card className={classes.main}>
       <img src={details.image} alt="" className={classes.image} />
@@ -91,21 +95,21 @@ function CartProductCard(props) {
           <Typography className={classes.title}>{details.title}</Typography>
           <Typography>₹ {calcPrice(details.price).toLocaleString()}</Typography>
         </div>
-        <Typography className={classes.stock}>In stock</Typography>
+        <Typography className={classes.stock}>{t.inStock}</Typography>
         <div className={classes.giftDiv}>
           <Typography className={classes.giftOptions}>
-            Gift options not available.
+            {t.giftOptionsNotAvailable}
           </Typography>
           <a
             href="https://www.amazon.in/gp/help/customer/display.html?pop-up=1&nodeId=200898020"
             className={classes.link}
             target="blank"
           >
-            Learn more
+          {t.learnMore}
           </a>
         </div>
         <div className={classes.quantityDiv}>
-          <Typography className={classes.quantity}>Quantity: </Typography>
+          <Typography className={classes.quantity}>{t.quantity} </Typography>
           <select
             className={classes.select}
             onChange={(e) => {
@@ -129,7 +133,7 @@ function CartProductCard(props) {
           className={`${classes.link} ${classes.DeleteButton}`}
           onClick={deleteFromCart}
         >
-          Delete item from Cart
+          {t.deleteItemFromCart}
         </Typography>
       </div>
     </Card>
