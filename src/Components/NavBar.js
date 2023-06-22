@@ -200,6 +200,7 @@ function NavBar() {
   const name = useSelector((state) => state.user.displayName);
   const dispatch = useDispatch();
   const cartCount = useSelector((state) => state.cart.count);
+
   const getLanguage = useSelector((state) => state.language.lang);
 
   const onSignOut = async () => {

@@ -1,6 +1,7 @@
 const english = {
   success: "Success",
   hello: "Hello",
+  guest: "Guest",
   signIn: "Sign in",
   signOut:"Sign out",
   signUp: "Sign up",

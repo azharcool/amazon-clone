@@ -1,5 +1,6 @@
 const vietnam = {
     success: "thành công",
+    guest: "Khách mời",
     hello: "Xin chào",
     signIn: "đăng nhập",
     signOut:"đăng xuất",
