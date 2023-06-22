@@ -25,6 +25,15 @@ import {
 } from "@mui/material";
 import SignedInAction from "../Actions/SignedInAction";
 import DrawerComp from "./DrawerComp";
+import Box from "@mui/material/Box";
+import Popper from "@mui/material/Popper";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import SetLanguageAction from "./../Actions/SetLanguageAction";
+import { translations } from "./../translate/translate";
 
 const useStyles = makeStyles({
   div: {
@@ -205,6 +214,12 @@ const useStyles = makeStyles({
   },
 });
 
+const languageIcons = {
+  English: "IN",
+  Chinese: "CN",
+  Vietnam: "VN",
+};
+
 function NavBar() {
   const theme = useTheme();
 
@@ -237,10 +252,15 @@ function NavBar() {
     apiKey: "",
     appName: "[DEFAULT]",
   };
+  const [open, setOpen] = React.useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const name = useSelector((state) => state.user.displayName);
   const dispatch = useDispatch();
   const cartCount = useSelector((state) => state.cart.count);
+
+  const getLanguage = useSelector((state) => state.language.lang);
 
   const onSignOut = async () => {
     dispatch(setUserAction(initialUserState));
@@ -249,11 +269,23 @@ function NavBar() {
       setOpen(true);
     }, 300);
   };
-  const [open, setOpen] = React.useState(false);
+
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const openPopper = Boolean(anchorEl);
+  const id = openPopper ? "simple-popper" : undefined;
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleLanguage = (value) => {
+    dispatch(SetLanguageAction(value));
+  };
+
+  const t = translations.get(getLanguage);
 
   return (
     <div className={classes.div}>
@@ -265,7 +297,7 @@ function NavBar() {
             onClose={handleClose}
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle>Success</DialogTitle>
+            <DialogTitle>{t.success}</DialogTitle>
             <DialogContent>
               <Typography style={{ whiteSpace: "pre-line" }}>
                 You have been Logged out successfully!
@@ -329,21 +361,72 @@ function NavBar() {
                   <Search className={classes.searchIcon} />
                 </Button>
               </div>
-              <div className={classes.headerButton}>
-                <Typography className={classes.text}>English</Typography>
+              <div className={classes.headerButton} onClick={handleClick}>
+                <Typography className={classes.text}>{getLanguage}</Typography>
                 <Typography className={classes.flagDiv}>
                   <ReactCountryFlag
-                    countryCode="IN"
+                  countryCode={languageIcons[getLanguage]}
                     svg
                     className={classes.flag}
                   />
                   <AiOutlineCaretDown className={classes.downIcon} />
                 </Typography>
+                <Popper id={id} open={openPopper} anchorEl={anchorEl}>
+              <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemButton onClick={() => handleLanguage("English")}>
+                      <ReactCountryFlag
+                        countryCode="IN"
+                        svg
+                        className={classes.flag}
+                      />
+                      <ListItemText
+                        primary="English"
+                        sx={{
+                          padding: "0 5px",
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton onClick={() => handleLanguage("Chinese")}>
+                      <ReactCountryFlag
+                        countryCode="CN"
+                        svg
+                        className={classes.flag}
+                      />
+                      <ListItemText
+                        primary="Chinese"
+                        sx={{
+                          padding: "0 5px",
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton onClick={() => handleLanguage("Vietnam")}>
+                      <ReactCountryFlag
+                        countryCode="VN"
+                        svg
+                        className={classes.flag}
+                      />
+                      <ListItemText
+                        primary="Vietnam"
+                        sx={{
+                          padding: "0 5px",
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </Box>
+            </Popper>
               </div>
 
               {name ? (
                 <div className={classes.headerButton} onClick={onSignOut}>
-                  <Typography className={classes.text}>Hello {name}</Typography>
+                  <Typography className={classes.text}>{t.hello} {name}</Typography>
                   <Typography className={classes.text2}>Sign out</Typography>
                 </div>
               ) : (
@@ -359,7 +442,7 @@ function NavBar() {
                       }}
                       className={classes.text}
                     >
-                      Hello Guest
+                    {t.hello} {t.guest}
                     </Typography>
                     <Typography
                       sx={{
