@@ -1,21 +1,27 @@
-import { Card, makeStyles, Typography,useMediaQuery,useTheme } from "@material-ui/core";
+import {
+  Card,
+  makeStyles,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import React from "react";
 import { useDispatch } from "react-redux";
 import RemoveItemFromCartAction from "./../Actions/RemoveItemFromCartAction";
 import UpdateProductAction from "./../Actions/UpdateProductAction";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { translations } from "./../translate/translate";
-
 const useStyles = makeStyles({
   main: {
     height: "70vh",
     boxShadow: "none",
     display: "flex",
     justifyContent: "center",
-    marginTop:"2rem",
+    marginTop: "2rem",
   },
   image: {
-    width: "20%",
+    width: "20rem",
+    height:"20rem",
     marginRight: "2rem",
   },
   title: {
@@ -70,22 +76,18 @@ const useStyles = makeStyles({
   quantity: {
     fontWeight: "bold",
   },
-  div:{
-   display:"flex",
-   flexDirection: "column",
-   justifyContent: "center",
-   paddingLeft:"16rem",
-   
-  
-   
+  div: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    paddingLeft: "16rem",
   },
-  
+
   cImage: {
     width: "50%",
-    height:"50%",
+    height: "50%",
     marginTop: "2rem",
     marginBottom: "2rem",
-   
   },
   cTitle: {
     fontSize: "2rem",
@@ -141,9 +143,9 @@ const useStyles = makeStyles({
   },
 });
 function CartProductCard(props) {
-  const  theme = useTheme();
+  const theme = useTheme();
 
-  const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
+  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const getLanguage = useSelector((state) => state.language.lang);
   const { details } = props;
   const classes = useStyles();
@@ -157,114 +159,130 @@ function CartProductCard(props) {
   const t = translations.get(getLanguage);
   return (
     <Card className={classes.main}>
-    {isMatch?<div className={classes.div}><img src={details.image} alt="" className={classes.cImage} />
-    <div style={{ width: "75%" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent:"center",
-          flexDirection:"column",
-          width: "100%",
-        }}
-      >
-        <Typography className={classes.cTitle}>{details.title}</Typography>
-        <Typography>₹ {calcPrice(details.Price).toLocaleString()}</Typography>
-      </div>
-      <Typography className={classes.cStock}>In stock</Typography>
-      <div className={classes.cGiftDiv}>
-        <Typography className={classes.cGiftOptions}>
-          Gift options not available.
-        </Typography>
-        <a
-          href="https://www.amazon.in/gp/help/customer/display.html?pop-up=1&nodeId=200898020"
-          className={classes.cLink}
-          target="blank"
-        >
-          Learn more
-        </a>
-      </div>
-      <div className={classes.cQuantityDiv}>
-        <Typography className={classes.cQuantity}>Quantity: </Typography>
-        <select
-          className={classes.cSelect}
-          onChange={(e) => {
-            // setItemQuantity(e.target.value);
-            dispatch(UpdateProductAction(details.id, e.target.value));
-          }}
-          value={details.quantity}
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
-      </div>
-      <Typography
-        className={`${classes.cLink} ${classes.cDeleteButton}`}
-        onClick={deleteFromCart}
-      >
-        Delete item from Cart
-      </Typography>
-    </div></div>:
-    <><img src={details.image} alt="" className={classes.image} />
-    <div style={{ width: "75%" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "100%",
-        }}
-      >
-        <Typography className={classes.title}>{details.title}</Typography>
-        <Typography>₹ {calcPrice(details.price).toLocaleString()}</Typography>
-      </div>
-      <Typography className={classes.stock}>In stock</Typography>
-      <div className={classes.giftDiv}>
-        <Typography className={classes.giftOptions}>
-          Gift options not available.
-        </Typography>
-        <a
-          href="https://www.amazon.in/gp/help/customer/display.html?pop-up=1&nodeId=200898020"
-          className={classes.link}
-          target="blank"
-        >
-          Learn more
-        </a>
-      </div>
-      <div className={classes.quantityDiv}>
-        <Typography className={classes.quantity}>Quantity: </Typography>
-        <select
-          className={classes.select}
-          onChange={(e) => {
-            // setItemQuantity(e.target.value);
-            dispatch(UpdateProductAction(details.id, e.target.value));
-          }}
-          value={details.quantity}
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
-      </div>
-      <Typography
-        className={`${classes.link} ${classes.DeleteButton}`}
-        onClick={deleteFromCart}
-      >
-        Delete item from Cart
-      </Typography>
-    </div></>}
-      
+      {isMatch ? (
+        <div className={classes.div}>
+          <img src={details.image} alt="" className={classes.cImage} />
+          <div style={{ width: "75%" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                width: "100%",
+              }}
+            >
+              <Typography className={classes.cTitle}>
+                {details.title}
+              </Typography>
+              <Typography>
+                ₹ {calcPrice(details.Price).toLocaleString()}
+              </Typography>
+            </div>
+            <Typography className={classes.cStock}>{t.inStock}</Typography>
+            <div className={classes.cGiftDiv}>
+              <Typography className={classes.cGiftOptions}>
+                {t.giftOptionsNotAvailable}
+              </Typography>
+              <a
+                href="https://www.amazon.in/gp/help/customer/display.html?pop-up=1&nodeId=200898020"
+                className={classes.cLink}
+                target="blank"
+              >
+                {t.learnMore}
+              </a>
+            </div>
+            <div className={classes.cQuantityDiv}>
+              <Typography className={classes.cQuantity}>
+                {t.quantity}{" "}
+              </Typography>
+              <select
+                className={classes.cSelect}
+                onChange={(e) => {
+                  // setItemQuantity(e.target.value);
+                  dispatch(UpdateProductAction(details.id, e.target.value));
+                }}
+                value={details.quantity}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+              </select>
+            </div>
+            <Typography
+              className={`${classes.cLink} ${classes.cDeleteButton}`}
+              onClick={deleteFromCart}
+            >
+              {t.deleteFromCart}
+            </Typography>
+          </div>
+        </div>
+      ) : (
+        <>
+          <img src={details.image} alt="" className={classes.image} />
+          <div style={{ width: "75%" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography className={classes.title}>{details.title}</Typography>
+              <Typography>
+                ₹ {calcPrice(details.price).toLocaleString()}
+              </Typography>
+            </div>
+            <Typography className={classes.stock}>{t.inStock}</Typography>
+            <div className={classes.giftDiv}>
+              <Typography className={classes.giftOptions}>
+                {t.giftOptionsNotAvailable}
+              </Typography>
+              <a
+                href="https://www.amazon.in/gp/help/customer/display.html?pop-up=1&nodeId=200898020"
+                className={classes.link}
+                target="blank"
+              >
+                {t.learnMore}
+              </a>
+            </div>
+            <div className={classes.quantityDiv}>
+              <Typography className={classes.quantity}>
+                {t.quantity}{" "}
+              </Typography>
+              <select
+                className={classes.select}
+                onChange={(e) => {
+                  // setItemQuantity(e.target.value);
+                  dispatch(UpdateProductAction(details.id, e.target.value));
+                }}
+                value={details.quantity}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+              </select>
+            </div>
+            <Typography
+              className={`${classes.link} ${classes.DeleteButton}`}
+              onClick={deleteFromCart}
+            >
+              {t.deleteItemFromCart}
+            </Typography>
+          </div>
+        </>
+      )}
     </Card>
   );
 }

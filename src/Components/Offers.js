@@ -6,6 +6,8 @@ import {
   NoCostEmiModal,
   PartnerOffersModal,
 } from "./OffersModal";
+import {  useSelector } from "react-redux";
+import { translations } from "./../translate/translate";
 
 const useStyles = makeStyles({
   main: {
@@ -14,14 +16,14 @@ const useStyles = makeStyles({
   },
   card: {
     width: "10vw",
-    height: "15vh",
+    height: "auto",
     padding: "0.7rem",
     marginRight: "0.8rem",
     boxShadow: "0px 0px 3px 2px #D3D3D3",
   },
   mCard: {
-    width: "18vw",
-    height: "15vh",
+    width: "20vw",
+    height: "20vh",
     padding: "0.7rem",
     marginRight: "1rem",
     boxShadow: "0px 0px 3px 2px #D3D3D3",
@@ -53,6 +55,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     fontSize: "0.8rem",
     color: "#007185",
+    paddingTop:"2rem",
     "&:hover": {
       cursor: "pointer",
       textDecoration: "underline",
@@ -80,8 +83,15 @@ const useStyles = makeStyles({
     fontSize: "0.6rem",
     marginLeft: "0.2rem",
   },
+  mofferIcon: {
+    fontSize: "0.6rem",
+    // marginLeft: "0.2rem",
+    paddingTop:"12rem"
+  },
 });
 function Offers() {
+  const getLanguage = useSelector((state) => state.language.lang);
+  const t = translations.get(getLanguage);
   const  theme = useTheme();
 
   const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
@@ -120,9 +130,9 @@ function Offers() {
         <>
        
     <Card className={classes.mCard}>
-      <Typography className={classes.mTitle}>No Cost EMI</Typography>
+      <Typography className={classes.mTitle}>{t.noCostEMI}</Typography>
       <Typography className={classes.mText}>
-        No Cost EMI available on Amazon Pay Later.
+        {t.noCostEMIAvailable}
       </Typography>
       <Typography
         className={classes.mOffer}
@@ -131,13 +141,13 @@ function Offers() {
           toggleDrawer(true);
         }}
       >
-        1 offer <AiOutlineRight className={classes.offerIcon} />
+        {t.oneOffer} <AiOutlineRight className={classes.mofferIcon} />
       </Typography>
     </Card>
     <Card className={classes.mCard}>
-      <Typography className={classes.mTitle}>Bank Offer</Typography>
+      <Typography className={classes.mTitle}>{t.bankOffer}</Typography>
       <Typography className={classes.mText}>
-        5% Instant Discount up to INR 250 on HSBC Cashback Ca...
+        {t.InstantDiscountuptoINRonHSBCCashbackCardCreditCard}
       </Typography>
       <Typography
         className={classes.mOffer}
@@ -146,13 +156,13 @@ function Offers() {
           toggleDrawer(true);
         }}
       >
-        2 offers <AiOutlineRight className={classes.offerIcon} />
+        {t.twoOffer} <AiOutlineRight className={classes.mofferIcon} />
       </Typography>
     </Card>
     <Card className={classes.mCard}>
-      <Typography className={classes.mTitle}>Partner Offer</Typography>
+      <Typography className={classes.mTitle}>{t.partnerOffer}</Typography>
       <Typography className={classes.mText}>
-        Get GST invoice and save up to 28% on business purchases.
+         {t.getGstInvoiceAndSaveUp}
       </Typography>
       <Typography
         className={classes.mOffer}
@@ -161,7 +171,7 @@ function Offers() {
           toggleDrawer(true);
         }}
       >
-        1 offer <AiOutlineRight className={classes.offerIcon} />
+       {t.oneOffer} <AiOutlineRight className={classes.mofferIcon} />
       </Typography>
     </Card>
         </>
@@ -171,7 +181,7 @@ function Offers() {
     <Card className={classes.card}>
       <Typography className={classes.title}>No Cost EMI</Typography>
       <Typography className={classes.text}>
-        No Cost EMI available on Amazon Pay Later.
+        {t.noCostEMIAvailable}
       </Typography>
       <Typography
         className={classes.offer}
@@ -180,13 +190,13 @@ function Offers() {
           toggleDrawer(true);
         }}
       >
-        1 offer <AiOutlineRight className={classes.offerIcon} />
+        {t.oneOffer} <AiOutlineRight className={classes.offerIcon} />
       </Typography>
     </Card>
     <Card className={classes.card}>
       <Typography className={classes.title}>Bank Offer</Typography>
       <Typography className={classes.text}>
-        5% Instant Discount up to INR 250 on HSBC Cashback Ca...
+        {t.InstantDiscountuptoINRonHSBCCashbackCardCreditCard}
       </Typography>
       <Typography
         className={classes.offer}
@@ -195,13 +205,13 @@ function Offers() {
           toggleDrawer(true);
         }}
       >
-        2 offers <AiOutlineRight className={classes.offerIcon} />
+        {t.twoOffer} <AiOutlineRight className={classes.offerIcon} />
       </Typography>
     </Card>
     <Card className={classes.card}>
       <Typography className={classes.title}>Partner Offer</Typography>
       <Typography className={classes.text}>
-        Get GST invoice and save up to 28% on business purchases.
+        {t.getGstInvoiceAndSaveUp}
       </Typography>
       <Typography
         className={classes.offer}
@@ -210,7 +220,7 @@ function Offers() {
           toggleDrawer(true);
         }}
       >
-        1 offer <AiOutlineRight className={classes.offerIcon} />
+        {t.oneOffer} <AiOutlineRight className={classes.offerIcon} />
       </Typography>
     </Card>
     </>}

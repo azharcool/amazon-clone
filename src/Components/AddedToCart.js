@@ -1,11 +1,19 @@
 import React, { useEffect } from "react";
-import { Button, makeStyles, Typography,useMediaQuery,useTheme } from "@material-ui/core";
+import {
+  Button,
+  makeStyles,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { BiChevronLeft } from "react-icons/bi";
 import { BiRupee } from "react-icons/bi";
 import CheckoutButton from "./CheckoutButton";
+
+import { translations } from "./../translate/translate";
 const useStyles = makeStyles({
   main: {
     marginTop: "10vh",
@@ -22,20 +30,18 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "center",
     alignContent: "center",
-    paddingTop:"10rem",
-    paddingLeft:"15rem",
-
+    // paddingTop:"10rem",
+    paddingLeft: "15rem",
   },
   fCard: {
-    height: "60vh",
-    width: "80vw",
+    height: "70vh",
+    // width: "80vw",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     background: "white",
-    padding: "1rem 2rem",
-  }
-  ,
+    // padding: "1rem 2rem",
+  },
   card: {
     height: "50vh",
     width: "50vw",
@@ -43,17 +49,7 @@ const useStyles = makeStyles({
     background: "white",
     padding: "1rem 2rem",
   },
-  fCard2: {
-    height: "20vh",
-    width: "27vw",
-    display: "flex",
-    flexDirection: "row",
-    
-    justifyContent: "center",
-    background: "white",
-    paddingLeft: "4vw",
-    padding: "3vh 0",
-  },
+
   card2: {
     height: "20vh",
     width: "27vw",
@@ -64,6 +60,16 @@ const useStyles = makeStyles({
     background: "white",
     paddingLeft: "4vw",
     padding: "3vh 0",
+  },
+  mcard2: {
+    // height: "20vh",
+    // width: "27vw",
+    // display: "flex",
+    // flexDirection: "column",
+    // // alignItems: "start",
+    // justifyContent: "space-around",
+    // background: "white",
+    // // paddingLeft: "4vw",
   },
   heading: {
     fontSize: "2rem",
@@ -85,13 +91,14 @@ const useStyles = makeStyles({
     width: "20vw",
   },
   fImage: {
-    height: "50vh",
-    width: "25vw",
-    marginLeft:"3.5rem",
+    height: "30vh",
+    width: "30vw",
+    // marginLeft:"3.5rem",
   },
   subDiv2: {
     marginLeft: "2rem",
   },
+
   backBtn: {
     textTransform: "none",
     display: "flex",
@@ -113,12 +120,11 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   fRupee: {
-    fontSize: "2rem",
+    fontSize: "3rem",
     display: "flex",
-    textAlign:"center",
-    marginLeft:"1.5rem",
+    textAlign: "center",
+
     alignItems: "center",
-  
   },
   goToCart: {
     width: "18vw",
@@ -137,14 +143,14 @@ const useStyles = makeStyles({
   },
   fGoToCart: {
     width: "20vw",
-    padding: "0.5rem 0.6rem",
+    padding: "2rem 7rem",
     borderRadius: "0.3rem",
     border: "1px solid lightgrey",
     cursor: "pointer",
     fontSize: "1.5rem",
     textAlign: "center",
-    fontSize:"2rem",
-    marginLeft:"5rem",
+    fontSize: "2rem",
+    
     color: "black",
     boxShadow: "0.5px 0.5px 2px 0px grey",
     "&:hover": {
@@ -154,11 +160,13 @@ const useStyles = makeStyles({
   bottomButton: {
     height: "20vh",
   },
+ 
   link: {
     textDecoration: "none",
   },
 });
 function AddedToCart() {
+  const getLanguage = useSelector((state) => state.language.lang);
   const theme = useTheme();
 
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
@@ -186,103 +194,121 @@ function AddedToCart() {
     }
     return itemQuantity;
   };
+  const t = translations.get(getLanguage);
   return (
     <>
-    {isMatch ? 
-      <div className={classes.fDiv}>
-      {product && (
-        <div >
-          <div className={classes.fMain}>
-            <div className={classes.fCard}>
-              <div>
-                <img src={product.image} alt="" className={classes.fImage} />
-              </div>
-              <div className={classes.subDiv2}>
-                <Typography className={classes.fHeading}>
-                  <FaCheckCircle className={classes.fCheckIcon} />
-                  Added to Cart
-                </Typography>
-                <Typography>{product.fTitle}</Typography>
-                <Typography style={{fontSize:"1.5rem"}}>Total Quantity: {calcItemQuantity()}</Typography>
-              </div>
-            </div>
-            <div className={classes.card2}>
-              <Typography className={classes.fRupee}>
-                <b>Cart subtotal:</b> &nbsp;
-                <BiRupee className={classes.fRupee} />
-                {cartTotal().toLocaleString()}
-              </Typography>
+      {isMatch ? (
+        <div className={classes.fDiv}>
+          {product && (
+            <div>
+              <div className={classes.fMain}>
+                <div className={classes.fCard}>
+                  <div>
+                    <img
+                      src={product.image}
+                      alt=""
+                      className={classes.fImage}
+                    />
+                  </div>
+                  <div className={classes.msubDiv2}>
+                    <Typography className={classes.fHeading}>
+                      <FaCheckCircle className={classes.fCheckIcon} />
+                      {t.AddedToCart}
+                    </Typography>
 
-              <CheckoutButton quantity={quantity} />
+                    <Typography style={{ fontSize: "2rem" }}>
+                      {product.title}
+                    </Typography>
 
-              <Link to="/Cart" className={classes.link}>
-                <Typography className={classes.fGoToCart}>Go to Cart</Typography>
-              </Link>
-            </div>
-          </div>
-          <div className={classes.bottomButton}>
-            <center>
-              <Link to="/" className={classes.link}>
-                <Button className={classes.backBtn}>
-                  <BiChevronLeft />{" "}
-                  <Typography className={classes.buttonText}>
-                    See more products
+                    <Typography style={{ fontSize: "1.5rem" }}>
+                      {t.totalQuantity} {calcItemQuantity()}
+                    </Typography>
+                  </div>
+                </div>
+                <div className={classes.mcard2}>
+                  <Typography className={classes.fRupee}>
+                    <b>{t.cartSubTotal}</b> &nbsp;
+                    <BiRupee className={classes.fRupee} />
+                    {cartTotal().toLocaleString()}
                   </Typography>
-                </Button>
-              </Link>
-            </center>
-          </div>
+
+                  <CheckoutButton quantity={quantity} />
+
+                  <Link to="/Cart" className={classes.link}>
+                    <Typography className={classes.fGoToCart}>
+                      {t.gotoCart}
+                    </Typography>
+                  </Link>
+                </div>
+              </div>
+              <div className={classes.bottomButton}>
+                <center>
+                  <Link to="/" className={classes.link}>
+                    <Button className={classes.backBtn}>
+                      <BiChevronLeft />{" "}
+                      <Typography className={classes.buttonText}>
+                        {t.seeMoreProduct}
+                      </Typography>
+                    </Button>
+                  </Link>
+                </center>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-      </div> 
-      :
-       <>
-       {product && (
-        <div>
-          <div className={classes.main}>
-            <div className={classes.card}>
-              <div>
-                <img src={product.image} alt="" className={classes.image} />
-              </div>
-              <div className={classes.subDiv2}>
-                <Typography className={classes.heading}>
-                  <FaCheckCircle className={classes.checkIcon} />
-                  Added to Cart
-                </Typography>
-                <Typography>{product.title}</Typography>
-                <Typography>Total Quantity: {calcItemQuantity()}</Typography>
-              </div>
-            </div>
-            <div className={classes.card2}>
-              <Typography className={classes.rupee}>
-                <b>Cart subtotal:</b> &nbsp;
-                <BiRupee className={classes.rupee} />
-                {cartTotal().toLocaleString()}
-              </Typography>
-
-              <CheckoutButton quantity={quantity} />
-
-              <Link to="/Cart" className={classes.link}>
-                <Typography className={classes.goToCart}>Go to Cart</Typography>
-              </Link>
-            </div>
-          </div>
-          <div className={classes.bottomButton}>
-            <center>
-              <Link to="/" className={classes.link}>
-                <Button className={classes.backBtn}>
-                  <BiChevronLeft />{" "}
-                  <Typography className={classes.buttonText}>
-                    See more products
+      ) : (
+        <>
+          {product && (
+            <div>
+              <div className={classes.main}>
+                <div className={classes.card}>
+                  <div>
+                    <img src={product.image} alt="" className={classes.image} />
+                  </div>
+                  <div className={classes.subDiv2}>
+                    <Typography className={classes.heading}>
+                      <FaCheckCircle className={classes.checkIcon} />
+                      {t.AddedToCart}
+                    </Typography>
+                    <Typography>{product.title}</Typography>
+                    <Typography>
+                      {t.totalQuantity}
+                      {calcItemQuantity()}
+                    </Typography>
+                  </div>
+                </div>
+                <div className={classes.card2}>
+                  <Typography className={classes.rupee}>
+                    <b>{t.cartSubTotal}</b> &nbsp;
+                    <BiRupee className={classes.rupee} />
+                    {cartTotal().toLocaleString()}
                   </Typography>
-                </Button>
-              </Link>
-            </center>
-          </div>
-        </div>
+
+                  <CheckoutButton quantity={quantity} />
+
+                  <Link to="/Cart" className={classes.link}>
+                    <Typography className={classes.goToCart}>
+                      {t.gotoCart}
+                    </Typography>
+                  </Link>
+                </div>
+              </div>
+              <div className={classes.bottomButton}>
+                <center>
+                  <Link to="/" className={classes.link}>
+                    <Button className={classes.backBtn}>
+                      <BiChevronLeft />{" "}
+                      <Typography className={classes.buttonText}>
+                        {t.seeMoreProduct}
+                      </Typography>
+                    </Button>
+                  </Link>
+                </center>
+              </div>
+            </div>
+          )}
+        </>
       )}
-       </>}
-      
     </>
   );
 }

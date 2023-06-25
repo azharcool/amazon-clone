@@ -1,6 +1,8 @@
 import { Button, Divider, makeStyles, Typography, } from "@material-ui/core";
 import React, { useState } from "react";
 import { BiChevronDown, BiChevronRight, BiChevronLeft } from "react-icons/bi";
+import {  useSelector } from "react-redux";
+import { translations } from "./../translate/translate";
 
 const useStyles = makeStyles({
   headerDiv: {
@@ -194,7 +196,8 @@ const useStyles = makeStyles({
   },
 });
 export const NoCostEmiModal = (props) => {
-
+  const getLanguage = useSelector((state) => state.language.lang);
+  const t = translations.get(getLanguage);
   const classes = useStyles();
   const [FAQ, setFAQ] = useState(false);
   const [terms, setTerms] = useState(false);
@@ -217,7 +220,7 @@ export const NoCostEmiModal = (props) => {
     <div>
     
       <div className={classes.headerDiv}>
-        <Typography className={classes.header}>No Cost EMI</Typography>
+        <Typography className={classes.header}>{t.noCostEMI}</Typography>
         <Button
           className={classes.close}
           onClick={() => {
@@ -228,17 +231,12 @@ export const NoCostEmiModal = (props) => {
         </Button>
       </div>
       <div className={classes.body}>
-        <Typography className={classes.text1}>Special Offers</Typography>
+        <Typography className={classes.text1}>{t.SpecialOffer}</Typography>
         <Typography className={classes.heading}>
-          Avail No Cost EMI on select cards for orders above ₹3000
+          {t.availNoCostEMIonselect}
         </Typography>
         <Typography className={classes.paragraph}>
-          To make this a No Cost EMI offer, interest amount will be discounted
-          from the price of your order. Total amount you pay to the bank
-          (excluding GST) will be equal to the price of the item. Bank may
-          charge you GST only on the interest amount. Certain tenures are
-          available on no cost EMI only on down payment. Please check EMI plans
-          in payments page for more details.
+         {t.tomakethisaNoCostEMIoffer}
         </Typography>
         <Divider className={classes.divider} />
         <Typography className={classes.btn} onClick={() => showFAQ(!FAQ)}>
@@ -246,53 +244,42 @@ export const NoCostEmiModal = (props) => {
             className={classes.downIcon}
             style={{ transform: rotateFAQ, transition: "all 0.05s linear" }}
           />
-          FAQs
+         {t.FAQs}
         </Typography>
         {FAQ && (
           <div className={classes.FAQ}>
             <ul className={classes.ul}>
               <li className={classes.ul}>
                 <Typography className={classes.question}>
-                  Is No Cost EMI available on buying more than one product in
-                  one order?
+                 {t.isNoCostEMIAvailableonBuyingMorethanOneProductinoneOrder}
                 </Typography>
                 <Typography className={classes.answer}>
-                  Yes. You can buy any number of products and avail No Cost EMI
-                  on products eligible for No Cost EMI. The discount will be
-                  calculated only on the eligible items.
+                 {t.YesYoucanbuyanynumberofproducts}
                 </Typography>
               </li>
               <li>
                 <Typography className={classes.question}>
-                  What is the minimum amount I need to purchase to avail EMI or
-                  No Cost EMI?
+                 {t.Whatistheminimumamount}
                 </Typography>
                 <Typography className={classes.answer}>
-                  EMI is available only on purchases above INR 3,000. As long as
-                  you are purchasing for products more than 3,000 you can avail
-                  No Cost EMI on eligible products in the cart.
+                  {t.EMIisavailableonlyonpurchasesaboveINR}
                 </Typography>
               </li>
               <li>
                 <Typography className={classes.question}>
-                  Is there any specific coupon code for No Cost EMI?
+                  {t.Isthereanyspecificcoupon}
                 </Typography>
                 <Typography className={classes.answer}>
-                  No. You just need to pay using eligible card and select tenure
-                  with No Cost EMI promotion enabled
+                 {t.NoYoujustneedtopayusingeligiblecard}
                 </Typography>
               </li>
 
               <li>
                 <Typography className={classes.question}>
-                  Will my bank continue to charge me interest?
+                  {t.Willmybankcontinuetocharge}
                 </Typography>
                 <Typography className={classes.answer}>
-                  Yes, your bank will charge you interest. However, this
-                  interest charge has been provided to you as an upfront
-                  discount at the time of your purchase, effectively giving you
-                  the benefit of a No Cost EMI. This discount excludes GST on
-                  interest amount that will be charged by your bank.
+                  {t.Yesyourbankwillchargeyouinterest}
                 </Typography>
               </li>
             </ul>
@@ -303,104 +290,76 @@ export const NoCostEmiModal = (props) => {
             className={classes.downIcon}
             style={{ transform: rotateTerms, transition: "all 0.05s linear" }}
           />
-          Terms and Conditions
+          {t.TermsandConditions}
         </Typography>
         {terms && (
           <div className={classes.termsDiv}>
             <Typography className={classes.termsHeading}>
-              Terms and Conditions of Credit Card No Cost EMI
+              I{t.TermsandConditions}
             </Typography>
             <Typography className={classes.termsBody}>
-              The following terms and conditions apply to no cost equated
-              monthly installment (""<b>EMI</b>"") transactions made using a
-              credit card issued by any bank and using EMI facility as a payment
-              option (""<b>No Cost EMI</b>"")
+              {t.Thefollowingtermsandconditionsapplytonocostequatedmonthlyinstallment} (""<b>{t.EMI}</b>""){t.transactionsmadeusingacreditcardissuedbyanybank} 
+               (""<b>{t.noCostEMI}</b>"")
             </Typography>
             <ul className={classes.ulTerms}>
               <li className={`${classes.termsBody} ${classes.listItem}`}>
-                The No Cost EMI facility is being offered to the customers who
-                make a purchase transaction on{" "}
+                {t.TheNoCostEMIfacilityisbeingofferedtothecustomers}{" "}
                 <a
                   href="http://www.amazon.in"
                   target="blank"
                   className={classes.amazonLink}
                 >
-                  www.amazon.in
+                  {t.wwwamazonin}
                 </a>{" "}
-                or the mobile application/ mobile site thereof (collectively, ""
-                <b>Amazon.in</b>"") using a credit card issued by any bank using
-                EMI facility; if available on Amazon.in
+                {t.orthemobileapplicationmobilesite} ""
+                <b>{t.Amazonin}</b>"") {t.usingacreditcardissuedbyanybankusingEMIfacility}
               </li>
               <li className={classes.termsBody}>
-                The No Cost EMI facility is made available on select products,
-                as determined from time to time.
+                {t.TheNoCostEMIfacilityismadeavailableonselectproducts}
               </li>
               <li className={classes.termsBody}>
-                The No Cost EMI payment option can only be availed using the
-                credit card of any bank on Amazon.in and is not available on
-                purchases made using any other payment method including debit
-                cards or net banking or pay on delivery payment methods.
+                {t.TheNoCostEMIpaymentoptioncanonlybeavailedusingthecreditcard}
               </li>
               <li className={classes.termsBody}>
-                Using the No Cost EMI payment option, the customers who
-                undertake the purchase transactions on Amazon.in, will only pay
-                amounts such that the total of these amounts during the EMI
-                tenure is equal to the list price of the products as displayed
-                on Amazon.in (at the time of making the purchase transactions).
-                The participating sellers or brands (as the case may be) will
-                provide amounts equivalent to the interest imposed by the banks
-                to undertake the purchase transactions on EMI.
+                {t.UsingtheNoCostEMIpaymentoptionthecustomerswhoundertakethepurchase}
               </li>
               <li className={classes.termsBody}>
-                The banks issuing the credit cards reserve the right to charge
-                Goods and Services Tax (GST) or other applicable taxes on the
-                purchase transactions undertaken on EMI.
+                {t.ThebanksissuingthecreditcardsreservetherighttochargeGoods}
               </li>
               <li className={classes.termsBody}>
-                Customers can add more than one item to their cart and if all
-                the products are available on no cost EMI, you will get no cost
-                EMI discount on all. No Cost EMI discount will be calculated
-                only on the eligible items in the cart.{" "}
+                {t.Customerscanaddmorethanoneitemtotheircartandifalltheproducts}{" "}
               </li>
               <li className={classes.termsBody}>
-                Customers may avail the No Cost EMI facility, provided that:
+                {t.CustomersmayavailtheNoCostEMIfacilityprovidedthat}
                 <ol>
                   <li className={classes.termsBody}>
-                    the order is not cancelled by the customer or the
-                    participating sellers or Amazon; or
+                    {t.theorderisnotcancelledbythecustomerortheparticipatingsellersorAmazonor}
                   </li>
                   <li className={classes.termsBody}>
-                    the product is not returned / exchanged by the customer.
+                    {t.theproductisnotreturnedexchangedbythecustomer}
                   </li>
                 </ol>
               </li>
               <li className={classes.termsBody}>
-                The EMI facility is made available to the customers by and in
-                the sole discretion of the banks issuing the credit cards.
-                Amazon will not be liable for any claims on account of
-                availability or non-availability of EMI facility.
+                {t.TheEMIfacilityismadeavailabletothecustomersbyandinthesolediscretion}
               </li>
               <li className={classes.termsBody}>
-                Amazon reserves the right to stop No Cost EMI payment option at
-                any time without prior notice and without any liability
+                {t.AmazonreservestherighttostopNoCostEMIpaymentoption}
               </li>
             </ul>
             <Typography className={classes.termsInnerHeading}>
-              Terms & Conditions of Bajaj Finance No Cost EMI
+              {t.TermsConditionsofBajajFinanceNoCostEMI}
             </Typography>
             <Typography className={`${classes.termsBody} ${classes.listItem}`}>
-              The following terms & conditions apply to any transactions made
-              using BFL EMI Card as a payment option on Amazon.in.
+              {t.Thefollowingtermsconditionsapplytoanytransactionsmade}
             </Typography>
             <ul className={classes.ulTerms}>
               <li className={`${classes.termsBody} ${classes.listItem}`}>
-                The Bajaj Finance No Cost EMI facility is being offered by Bajaj
-                Finance Limited (""<b>BFL</b>"") to the customers having a Bajaj
-                Finance No Cost EMI card (""<b>Card</b>"").
+                {t.TheBajajFinanceNoCostEMIfacilityisbeingofferedbyBajajFinanceLimited}(""<b>{t.BFL}</b>"") 
+               {t.tothecustomershavingaBajajFinanceNoCostEMIcard} (""<b>{t.card}</b>"").
               </li>
               <li className={classes.termsBody}>
-                No Cost EMI (using the Card) as a payment method is available on
-                select products sold by participating sellers on{" "}
+                {t.NoCostEMIusingtheCardasapaymentmethodisavailableon}{" "}
                 <a
                   href="https://www.amazon.in/"
                   className={classes.amazonLink}
@@ -408,62 +367,37 @@ export const NoCostEmiModal = (props) => {
                 >
                   https://www.amazon.in/
                 </a>{" "}
-                (""<b>Website</b>"").
+                (""<b>{t.Website}</b>"").
               </li>
               <li className={classes.termsBody}>
-                The Bajaj Finance No Cost EMI facility can only be availed using
-                the Card and is not available on purchases made using debit or
-                credit cards issued by other banks, net banking or pay on
-                delivery payment methods.
+                {t.TheBajajFinanceNoCostEMIfacilitycanonlybeavailedusing}
               </li>
               <li className={classes.termsBody}>
-                As long as all items in the cart are eligible for No cost EMI on
-                BFL, you can avail the No Cost EMI with BFL option during
-                checkout.
+                {t.AslongasallitemsinthecartareeligibleforNocostEMIonBFL}
               </li>
               <li className={classes.termsBody}>
-                Amazon has no role to play pertaining to the Card including but
-                not limited to its issuance, approval, any extension,
-                pre-closure, or closure of any facility using the Card and such
-                matters are solely determined by BFL.
+                {t.AmazonhasnoroletoplaypertainingtotheCardincludingbutnotlimited}
               </li>
               <li className={classes.termsBody}>
-                The customer's use of the Card is also governed by the terms and
-                conditions of the agreement between the customers and BFL.
+                {t.ThecustomeruseoftheCardisalsogovernedbythetermsandconditions}
               </li>
               <li className={classes.termsBody}>
-                By using the Bajaj Finance No Cost EMI facility, the customers
-                hereby release and agree not to bring any claims against Amazon
-                in respect of use of the Card or the No Cost EMI facility, and
-                all such claims (if any) will lie only against BFL. The
-                customers also agree not to bring any claims against Amazon on
-                account of availability or non-availability of No Cost EMI
-                facility on the Website.
+                {t.ByusingtheBajajFinanceNoCostEMIfacilitythecustomershereby}
               </li>
               <li className={classes.termsBody}>
-                Amazon reserves the right to stop No Cost EMI facility at any
-                time without prior notice and without any liability.
+                {t.AmazonreservestherighttostopNoCostEMIfacilityatanytime}
               </li>
               <li className={classes.termsBody}>
-                Amazon does not charge the customer any processing or
-                convenience fee in providing the Bajaj Finance No Cost EMI
-                facility.
+                {t.Amazondoesnotchargethecustomeranyprocessingorconveniencefee}
               </li>
               <li className={classes.termsBody}>
-                If an order using the No Cost EMI facility is cancelled, any
-                refund to the customers or cancellation of loan facilities using
-                the Card will be undertaken by BFL. The customers hereby agree
-                that Amazon has no role in this regard and the customers will
-                not bring any claims against Amazon for any refund of any amount
-                paid to BFL for such order.
+                {t.IfanorderusingtheNoCostEMIfacilityiscancelled}
               </li>
               <li className={classes.termsBody}>
-                Amazon will not be held liable for any dispute arising out of or
-                in connection with such No Cost EMI facility or the customer's
-                use of the Card on the Website.
+                {t.Amazonwillnotbeheldliableforanydisputearisingoutofor}
               </li>
               <li className={classes.termsBody}>
-                Please contact BFL for any queries in relation to the Card.
+               {t.PleasecontactBFLforanyqueriesinrelationtotheCard}
               </li>
             </ul>
           </div>
@@ -474,6 +408,8 @@ export const NoCostEmiModal = (props) => {
 };
 
 export const BankOfferModal = (props) => {
+  const getLanguage = useSelector((state) => state.language.lang);
+  const t = translations.get(getLanguage);
   const classes = useStyles();
   const [offer1, setOffer1] = useState(false);
   const [offer2, setOffer2] = useState(false);
@@ -505,6 +441,7 @@ export const BankOfferModal = (props) => {
     }
   };
   const getDate = (val) => {
+    
     const current = new Date();
     const day = current.getDate() + val;
     const d = dayTh(day);
@@ -536,7 +473,7 @@ export const BankOfferModal = (props) => {
             onClick={backClicked}
           >
             <BiChevronLeft className={classes.leftIcon} />
-            Back
+            {t.Back}
           </Typography>
           <Button
             className={classes.close}
@@ -549,7 +486,7 @@ export const BankOfferModal = (props) => {
         </div>
       ) : (
         <div className={classes.headerDiv}>
-          <Typography className={classes.header}>Bank Offers</Typography>
+          <Typography className={classes.header}>{t.bankOffer}</Typography>
           <Button
             className={classes.close}
             onClick={() => {
@@ -563,315 +500,233 @@ export const BankOfferModal = (props) => {
 
       {backShow && offer1 && (
         <div className={classes.body}>
-          <Typography className={classes.headerOffer}>Offer 1</Typography>
+          <Typography className={classes.headerOffer}>{t.OfferOne}</Typography>
           <Typography className={classes.descOffer}>
-            5% Instant Discount up to INR 250 on HSBC Cashback Card Credit Card
-            Transactions. Minimum purchase value INR 1000
+            {t.InstantDiscountuptoINRonHSBCCashbackCardCreditCard}
           </Typography>
           <Typography className={classes.promotionTermsOffer}>
-            Promotion Terms
+         {t.promotionTerms}
           </Typography>
           <center>
             <Typography className={classes.termsInnerHeading}>
-              Frequently Asked Questions (FAQs)
+              {t.FrequentlyAskedQuestions}
             </Typography>
           </center>
           <ol className={classes.ol}>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                What is the offer?
+                {t.Whatistheoffer}
               </Typography>
               <Typography className={classes.termsBody}>
-                Get 5% Instant Discount with HSBC Cashback Credit Card, on
-                purchase of any eligible product listed on Amazon.in Between
-                July 01, 2022 to March 31, 2023. Please check the product page
-                for offer eligibility
+                {t.GetInstantDiscountwithHSBCCashbackCreditCard}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                How can I avail this offer?
+                {t.HowcanIavailthisoffer}
               </Typography>
               <Typography className={classes.termsBody}>
-                Just go through the normal purchase process and checkout with
-                the eligible products. On the payment page, please select your
-                saved HSBC Bank Card to pay.
+                {t.Justgothroughthenormalpurchaseprocessandcheckoutwiththeeligibleproducts}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                What is the minimum transaction size for the offer?
+                {t.Whatistheminimumtransactionsizefortheoffer}
               </Typography>
               <Typography className={classes.termsBody}>
-                As long as Rs. 1,000 is spent on the card for purchase of
-                eligible products, you will be eligible for the offer.
+                {t.AslongasRsisspentonthecardforpurchaseofeligibleproducts}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                What is the maximum discount that I can avail?
+                {t.WhatisthemaximumdiscountthatIcanavail}
               </Typography>
               <Typography className={classes.termsBody}>
-                The maximum discount possible per HSBC Cashback Credit Card
-                across Amazon.in Site and App during the offer period is
-                Rs.250/card/month.
+                {t.ThemaximumdiscountpossibleperHSBCCashbackCreditCardacrossAmazoninSiteandAppduringtheoffer}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                Is discount applicable on debit and credit cards?
+                {t.Isdiscountapplicableondebitandcreditcards}
               </Typography>
               <Typography className={classes.termsBody}>
-                Discount is available only on HSBC Cashback Credit Card.
+               {t.DiscountisavailableonlyonHSBCCashbackCreditCard}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
                 {" "}
-                Can I avail discount on EMI?
+                {t.CanIavaildiscountonEMI}
               </Typography>
               <Typography className={classes.termsBody}>
-                Yes, the discount is applicable on HSBC Cashback Credit Card.
+                {t.YesthediscountisapplicableonHSBCCashbackCreditCard}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                I did not receive the discount. Why?
+                {t.IdidnotreceivethediscountWhy}
               </Typography>
               <Typography className={classes.termsBody}>
-                Please make sure you are using an eligible card, and have
-                eligible products worth Rs. 1,000 or more in your cart.
-              </Typography>
-            </li>
-            <li>
-              <Typography className={classes.termsInnerHeading}>
-                {" "}
-                What if I cancel my order?
-              </Typography>
-              <Typography className={classes.termsBody}>
-                The Offer is applicable for a successful purchase. If Instant
-                Discount is availed on any purchase, and it is subsequently
-                cancelled, the refund amount of such purchases will be posted
-                adjusting the instant discount amount
+                {t.Pleasemakesureyouareusinganeligiblecardandhaveeligibleproducts}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
                 {" "}
-                My payment failed while placing the order, will I be eligible
-                for the offer?
+                {t.WhatifIcancelmyorder}
               </Typography>
               <Typography className={classes.termsBody}>
-                If your payment failed while placing the order, Amazon.in gives
-                you an option to revise your payment. If you revise your payment
-                successfully within the offer duration, you will be eligible for
-                the offer. For more information on revise payment,
+                {t.TheOfferisapplicableforasuccessfulpurchaseIfInstantDiscountisavailedonanypurchase}
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.termsInnerHeading}>
+                {" "}
+                {t.Mypaymentfailedwhileplacingtheorder}
+              </Typography>
+              <Typography className={classes.termsBody}>
+               {t.IfyourpaymentfailedwhileplacingtheorderAmazoningivesyouanoptiontoreviseyourpayment}
               </Typography>
             </li>
           </ol>
           <center>
             <u>
               <Typography className={classes.termsInnerHeading}>
-                Schedule 1
+               {t.ScheduleOne}
               </Typography>
             </u>
             <Typography className={classes.termsInnerHeading}>
-              Offer Terms and Conditions
+             {t.OfferTermsandConditions}
             </Typography>
           </center>
 
           <ol className={classes.ol}>
             <li>
               <Typography className={classes.termsBody}>
-                This offer ("Offer") is provided by The Hongkong and Shanghai
-                Banking Corporation Limited, India ("Bank") and is made
-                available on the website amazon.in or the mobile site or mobile
-                application thereof (collectively, "Amazon.in") by Amazon Pay
-                (India) Private Limited ("Amazon").
+                {t.ThisofferOfferisprovidedbyTheHongkongandShanghaiBankingCorporationLimited}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                These Offer terms and conditions ("Offer Terms") are in addition
-                to the Amazon.in Conditions of Use & Sale and Privacy Notice to
-                which you agree to by using Amazon.in and Terms & Conditions of
-                HSBC Cashback Credit Cards. In the event of any conflict between
-                the Conditions of Use & Sale and these Offer Terms, these Offer
-                Terms will prevail, only for the purposes of this Offer.
+                {t.TheseOffertermsandconditionsOfferTermsareinaddition}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                All residents of India holding HSBC Cashback Credit Card issued
-                by the Bank (each a "Card") are eligible to avail the Offer
-                (each a "Cardholder").
+                {t.AllresidentsofIndiaholdingHSBCCashbackCreditCardissuedbytheBank}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The Offer is valid from July 01, 2022 to March 31, 2023 i.e.
-                Always on (collectively "Offer Period"), unless revoked or
-                extended by Amazon (in its sole discretion), without any prior
-                notice and without any liability.
+               {t.TheOfferisvalidfromJulytoMarch}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Under this Offer, any Cardholder who, during the Offer Period,
-                purchases any product(s) (each a “Product”, and collectively
-                “Products”) on Amazon.in (https://www.amazon.in) and makes
-                payment using a Card shall be entitled to receive an instant
-                discount of 5% provided that such transaction is equivalent to
-                or exceeds INR 1,000 on a per transaction basis. Cardholders
-                need to check the offer eligibility on the Product Page.
+                {t.UnderthisOfferanyCardholderwhoduringtheOfferPeriod}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The maximum discount provided under this Offer will not exceed
-                INR 250 per Card per Month.
+                {t.ThemaximumdiscountprovidedunderthisOfferwillnotexceed}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The Offer is NOT applicable on payment made by customers using
-                the 'Card on Delivery' payment option.
+                {t.TheOfferisNOTapplicableonpaymentmadebycustomersusingtheCardonDelivery}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The purchase of Product by Cardholders on equated monthly
-                instalments (EMI) will also eligible for this Offer.
+                {t.ThepurchaseofProductbyCardholdersonequatedmonthlyinstalments}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                In case there are multiple items in a purchase order, the
-                item-wise savings/discount may vary. However, the overall
-                savings/discount on the purchase order will be equivalent to
-                maximum savings / discount the Cardholder is eligible for under
-                this Offer.
+                {t.Incasetherearemultipleitemsinapurchaseordertheitemwisesavingsdiscountmayvary}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                This Offer will not be applicable if the Cardholder or the
-                seller or Amazon cancel the order and/or the Cardholder returns
-                the Product and, in such a case, participation in the Offer will
-                be deemed withdrawn. In such a scenario, only the net amount
-                paid by the Cardholder will be refunded. In other words, the
-                instant discount will not be refunded.
+                {t.ThisOfferwillnotbeapplicableiftheCardholderorthesellerorAmazoncancel}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Amazon and/or the Bank reserve the right to disqualify the
-                Cardholder from the benefits of the Offer if any fraudulent
-                activity is identified as being carried out for the purpose of
-                availing the benefits under the said Offer or otherwise by use
-                of the Card.
+                {t.AmazonandortheBankreservetherighttodisqualifytheCardholder}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Amazon and/ or the Bank reserve the right, at any time, without
-                prior notice and without assigning any reason whatsoever, to
-                add/alter/modify/change or vary any or all of these Offer Terms
-                or to replace, wholly or in part, this Offer by another offer,
-                whether similar to this Offer or not, or to extend or withdraw
-                it altogether.
+                {t.AmazonandortheBankreservetherightatanytimewithoutpriornoticeandwithout}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Delinquent and over-limit Bank's credit card members will not
-                qualify for this Offer.
+                {t.DelinquentandoverlimitBankscreditcardmemberswillnotqualify}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Cardholders are not bound in any way to participate in this
-                Offer. Any participation is voluntary and the Offer is being
-                made purely on a best effort basis.
+                {t.CardholdersarenotboundinanywaytoparticipateinthisOffer}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Nothing herein amounts to a commitment by the Bank or Amazon to
-                conduct further, similar or other offers.
+               {t.NothinghereinamountstoacommitmentbytheBankorAmazontoconductfurther}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The above Offer is by way of a special offer and nothing
-                contained herein will prejudice or affect the terms and
-                conditions of the Card member agreement. The terms of the above
-                schemes will be in addition to and not in derogation of the
-                terms contained in the Card member agreement.
+                {t.TheaboveOfferisbywayofaspecialofferandnothingcontainedhereinwillprejudice}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                This Offer is not valid on corporate or commercial Cards.
+                {t.ThisOfferisnotvalidoncorporateorcommercialCards}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                This Offer is not available on: (i) purchase of products other
-                than the Product(s), or (ii) purchase of Product using a card
-                other than the Card(s).
+                {t.ThisOfferisnotavailableonipurchaseofproducts}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                By participating in this Offer, every Cardholder expressly
-                agrees that Bank and Amazon will not be liable or responsible
-                for any loss or damage whatsoever that a Cardholder may suffer,
-                directly or indirectly, in connection with the Offer including
-                but not limited to that associated with his/ her use or delivery
-                or misuse of the Product(s). Bank shall not be liable for
-                delivery, service, suitability, availability or quality of the
-                products offered under this offer.
+                {t.ByparticipatinginthisOffereveryCardholderexpresslyagreesthatBank}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                These Offer Terms are governed by the laws of India and the
-                courts at New Delhi will have exclusive jurisdiction over any
-                matters/ disputes arising out of or in relation to these Offer
-                Terms.
+                {t.TheseOfferTermsaregovernedbythelawsofIndiaandthecourtsatNewDelhi}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Any person availing this Offer will be deemed to have accepted
-                these Offer Terms.
+                {t.AnypersonavailingthisOfferwillbedeemedtohaveaccepted}
               </Typography>
             </li>
             <li>
               <div>
                 <Typography className={classes.termsBody}>
-                  Notwithstanding anything contained in these Offer Terms, this
-                  Offer is not applicable on the purchase of the following
-                  products:
+                  {t.NotwithstandinganythingcontainedintheseOfferTermsthisOfferisnotapplicable}
                 </Typography>
                 <ol>
                   <li className={classes.termsBody}>
-                    Gift Card(s) (Amazon branded and Non Amazon branded)
+                    {t.GiftCardsAmazonbrandedandNonAmazonbranded}
                   </li>
-                  <li className={classes.termsBody}>Infant Nutrition</li>
+                  <li className={classes.termsBody}>{t.InfantNutrition}</li>
                   <li className={classes.termsBody}>
-                    Prepaid phone recharges, DTH recharges
+                    {t.PrepaidphonerechargesDTHrecharges}
                   </li>
                   <li className={classes.termsBody}>
-                    Kindle e-books and Kindle Unlimited Subscription Program
+                    {t.KindleebooksandKindleUnlimitedSubscriptionProgram}
                   </li>
-                  <li className={classes.termsBody}>Amazon Pay balance</li>
+                  <li className={classes.termsBody}>{t.AmazonPaybalance}</li>
                   <li className={classes.termsBody}>
-                    Select Smart/Mobile phones (see product page for offer
-                    eligibility)
+                    {t.SelectSmartMobilephonesseeproductpageforoffereligibility}
                   </li>
-                  <li className={classes.termsBody}>Gold and Silver coins.</li>
+                  <li className={classes.termsBody}>{t.GoldandSilvercoins}</li>
                 </ol>
               </div>
             </li>
@@ -880,422 +735,322 @@ export const BankOfferModal = (props) => {
           <br />
           <Divider className={classes.divider} />
           <Typography className={classes.availOffer}>
-            How to avail offer
+            {t.Howtoavailoffer}
           </Typography>
           <ul className={classes.ulTerms}>
             <li className={classes.offerDesc}>
-              Select eligible card at the time of checkout
+              {t.Selecteligiblecardatthetimeofcheckout}
             </li>
             <li className={classes.offerDesc}>
-              No promo code required to avail the offer
+              {t.Nopromocoderequiredtoavailtheoffer}
             </li>
           </ul>
         </div>
       )}
+      
       {backShow && offer2 && (
         <div className={classes.body}>
           <Typography className={classes.headerOffer}>Offer 2</Typography>
           <Typography className={classes.descOffer}>
-            10% Instant Discount up to INR 500 on Bank of Baroda Credit Card
-            Transactions. Minimum purchase value INR 2000
+            {t.InstantDiscountuptoINRonBankofBarodaCreditCardTransactions}
           </Typography>
           <Typography className={classes.promotionTermsOffer}>
-            Promotion Terms
+            {t.promotionTerms}
           </Typography>
           <center>
             <Typography className={classes.termsInnerHeading}>
-              Frequently Asked Questions (FAQs)
+              {t.FrequentlyAskedQuestions}
             </Typography>
           </center>
           <Typography className={classes.offerDesc}>
-            <b>Offer period –</b> {getDate(0)} 00:00 HRS to {getDate(3)}{" "}
-            23:59HRS
+            <b>{t.Offerperiod}</b> {getDate(0)} 00:00 {t.HRSto} {getDate(3)}{" "}
+            23:59{t.HRS}
           </Typography>
 
           <ol className={classes.ol}>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                What is the BOB Offer?
+                {t.WhatistheBOBOffer}
               </Typography>
               <ol type="a" className={classes.ol}>
                 <li className={classes.termsBody}>
-                  Get 10% instant discount on BOB Credit Card payment
-                  transactions
+                  {t.GetinstantdiscountonBOBCreditCardpayment}
                 </li>
                 <li className={classes.termsBody}>
-                  Any cancelled, rejected or returned order(s) will not be
-                  eligible for the offer and the refund amount of such order
-                  will be adjusted with the instant discount amount.
+                  {t.Anycancelledrejectedorreturnedorderswillnotbeeligiblefortheoffer}
                 </li>
               </ol>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                What is the maximum discount that I can avail?
+                {t.WhatisthemaximumdiscountthatIcanavail}
               </Typography>
               <Typography className={classes.termsBody}>
-                The maximum discount possible upto INR 2000. Refer the below
-                table:
+                {t.ThemaximumdiscountpossibleuptoINRReferthebelowtable}
               </Typography>
               <table className={classes.listItem}>
                 <thead>
                   <th></th>
-                  <th>Min Transaction</th>
-                  <th>CC Max Discount</th>
-                  <th>CC EMI Max Discount</th>
+                  <th>{t.MinTransaction}</th>
+                  <th>{t.CCMaxDiscount}</th>
+                  <th>{t.CCEMIMaxDiscount}</th>
                 </thead>
                 <tr>
-                  <td>Mobiles</td>
+                  <td>{t.Mobiles}</td>
                   <td>7000</td>
                   <td>750</td>
                   <td>1250</td>
                 </tr>
                 <tr>
-                  <td>Fashion</td>
+                  <td>{t.Fashion}</td>
                   <td>2000</td>
                   <td>500</td>
                   <td>500</td>
                 </tr>
                 <tr>
-                  <td>Other Categories*</td>
+                  <td>{t.OtherCategories}</td>
                   <td>7000</td>
                   <td>1500</td>
                   <td>2000</td>
                 </tr>
               </table>
               <Typography className={classes.termsBody}>
-                *Applicable on Electronics, Large appliances, TVs, Home, Kitchen
-                categories
+                {t.ApplicableonElectronicsLargeappliancesTVsHomeKitchencategories}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                How can I avail this offer?
+                {t.HowcanIavailthisoffer}
               </Typography>
               <Typography className={classes.termsBody}>
-                There are no other special steps to avail this offer. Just go
-                through the normal purchase process and use your saved BOB card
-                to pay
+                {t.Therearenootherspecialstepstoavailthisoffer}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                Can I get this offer with Exchange offer?
+                {t.CanIgetthisofferwithExchangeoffer}
               </Typography>
               <Typography className={classes.termsBody}>
-                Yes, the offer is valid on exchange as long as minimum purchase
-                value (after Exchange discount) is spent on Bank Card.
+                {t.Yestheofferisvalidonexchangeaslongasminimumpurchase}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                Can I avail discount on card payment for cash on delivery order?
-                Are net Banking transactions also included in this Offer?
+                {t.CanIavaildiscountoncardpaymentforcashondeliveryorder}
               </Typography>
               <Typography className={classes.termsBody}>
-                COD and Net Banking transactions are NOT included in this Offer.
+                {t.CODandNetBankingtransactionsareNOTincludedinthisOffer}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                Would I get the Bank offer even if I make a part payment using
-                my Amazon Pay Balance?
+                {t.WouldIgettheBankofferevenifImakeapartpayment}
               </Typography>
               <Typography className={classes.termsBody}>
-                Yes, the offer is available on partial payments as long as
-                minimum purchase value is spent on BOB Card. The customer cannot
-                use EMI option if Amazon Pay balance is selected.
+                {t.YestheofferisavailableonpartialpaymentsaslongasminimumpurchasevalueisspentonBOBCard}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                Is the offer applicable on EMI?
+               {t.IstheofferapplicableonEMI}
               </Typography>
               <Typography className={classes.termsBody}>
-                Yes, the offer is applicable only on the Credit Card EMI
-                payment.
+                {t.YestheofferisapplicableonlyontheCreditCardEMIpayment}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                What if I cancel my order?
+                {t.WhatifIcancelmyorder}
               </Typography>
               <Typography className={classes.termsBody}>
-                The Offer is applicable for a successful purchase. If Instant
-                Discount is availed on any purchase, and it is subsequently
-                cancelled, the refund amount of such purchases will be posted
-                adjusting the instant discount amount availed on the purchase.
-                However, if you place another order within the offer period, you
-                shall get instant bank discount subject to offer eligibility.
+                {t.TheOfferisapplicableforasuccessfulpurchaseIfInstantDiscountisavailedonanypurchase}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsInnerHeading}>
-                My payment failed while placing the order, will I be eligible
-                for the cashback?
+                {t.MypaymentfailedwhileplacingtheorderwillIbeeligiblefortheoffer}
               </Typography>
               <Typography className={classes.termsBody}>
-                If your payment failed while placing the order, Amazon.in gives
-                you an option to revise your payment. If you revise your payment
-                within the offer duration, you will be eligible for the
-                cashback. For more information on revise payment,
+                {t.IfyourpaymentfailedwhileplacingtheorderAmazoningivesyouanoptiontoreviseyourpayment}
               </Typography>
             </li>
           </ol>
           <center>
             <u>
               <Typography className={classes.termsInnerHeading}>
-                Schedule 1
+                {t.ScheduleOne}
               </Typography>
             </u>
             <Typography className={classes.termsInnerHeading}>
-              Offer Terms and Conditions
+              {t.OfferTermsandConditions}
             </Typography>
           </center>
 
           <ol className={classes.ol}>
             <li>
               <Typography className={classes.termsBody}>
-                This "<b>Offer</b>" is provided to you by BoB Financial
-                Solutions Limited ("<b>Bank</b>") and Amazon Pay (India) Private
-                Limited (formerly known as Amazon Online Distribution Services
-                Private Limited) ("<b>Amazon</b>") and made available on the
-                website{" "}
+                {t.This} "<b>{t.offers}</b>" {t.isprovidedtoyoubyBoBFinancialSolutionsLimited} ("<b>{t.Bank}</b>") 
+                {t.andAmazonPayIndiaPrivateLimitedformerlyknownasAmazon} ("<b>Amazon</b>") 
+                {t.andmadeavailableonthewebsite}{" "}
                 <a href="www.amazon.in" className={classes.amazonLink}>
-                  www.amazon.in
+                 {t.wwwamazonin}
                 </a>{" "}
-                and the mobile site and mobile application thereof
-                (collectively, "<b>Amazon.in</b>").
+                {t.andthemobilesiteandmobileapplicationthereofcollectively}"<b>{t.Amazonin}</b>").
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                These Offer terms and conditions ("<b>Offer Terms</b>") are in
-                addition to the Amazon.in Conditions of Use & Sale and Privacy
-                Notice to which you agree to by using Amazon.in. In the event of
-                any conflict between the Conditions of Use & Sale and these
-                Offer Terms, these Offer Terms will prevail, only for the
-                purposes of this Offer.
+                {t.TheseOffertermsandconditions} ("<b>{t.OfferTerms}</b>") {t.areinadditiontotheAmazoninConditionsofUseSaleandPrivacyNotice}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                All residents of India holding a valid credit card issued by the
-                Bank (each a "<b>Card</b>") are eligible to avail the Offer
-                (each a "<b>Cardholder</b>").
+                {t.AllresidentsofIndiaholdingavalidcreditcardissuedbytheBankeacha} "<b>{t.card}</b>") 
+                 {t.areeligibletoavailtheOffereacha}"<b>{t.Cardholder}</b>".
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The offer is valid in the month of September 2022 i.e. 2nd to
-                5th September 2022 ("<b>Offer Period</b>"), unless revoked or
-                extended by Amazon in its sole discretion, without any prior
-                notice and without liability.
+                {t.TheofferisvalidinthemonthofSeptemberietoSeptember} ("<b>{t.OfferPeriod}</b>"),{t.unlessrevokedorextendedbyAmazoninitssolediscretionwithoutany}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Under this Offer, any Cardholder who, during the Offer Duration,
-                makes any purchase Mobiles, Electronics, Large Appliances,
-                Furniture, TV, Home & Kitchen categories, Fashion categories
-                from Amazon.in and makes the payment using the BOB Credit Card,
-                will be entitled to receive an instant discount of 10% of the
-                total purchase value for a successful purchase transaction made
-                on Amazon.in, provided the purchase value for such transaction
-                (inclusive of taxes) is equivalent to or exceeds subject to a
-                minimum purchase of INR 7000 per transaction (and INR 2000 for
-                Fashion category)
+                {t.UnderthisOfferanyCardholderwhoduringtheOfferDurationmakesanypurchaseMobilesElectronics}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Each Cardholder can avail a maximum instant discount as per the
-                below table on Credit Card and Credit Card EMI payment per Card
-                under this Offer for the purchases on Amazon.in using the Card,
-                irrespective of number of purchases.
+                {t.EachCardholdercanavailamaximuminstantdiscountasperthebelowtable}
               </Typography>
               <table className={classes.listItem}>
                 <thead>
                   <th></th>
-                  <th>Min Transaction</th>
-                  <th>CC Max Discount</th>
-                  <th>CC EMI Max Discount</th>
+                  <th>{t.MinTransaction}</th>
+                  <th>{t.CCMaxDiscount}</th>
+                  <th>{t.CCEMIMaxDiscount}</th>
                 </thead>
                 <tr>
-                  <td>Mobiles</td>
+                  <td>{t.Mobiles}</td>
                   <td>7000</td>
                   <td>750</td>
                   <td>1250</td>
                 </tr>
                 <tr>
-                  <td>Fashion</td>
+                  <td>{t.Fashion}</td>
                   <td>2000</td>
                   <td>500</td>
                   <td>500</td>
                 </tr>
                 <tr>
-                  <td>Other Categories*</td>
+                  <td>{t.OtherCategories}</td>
                   <td>7000</td>
                   <td>1500</td>
                   <td>2000</td>
                 </tr>
               </table>
               <Typography className={classes.termsBody}>
-                *Applicable on Electronics, Large appliances, TVs, Home, Kitchen
-                categories
+                {t.ApplicableonElectronicsLargeappliancesTVsHomeKitchencategories}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The purchase of the product(s) will be governed by the terms of
-                sale, including terms of exchange (wherever available),
-                applicable to the sale of the product(s) on Amazon.in. This
-                Offer will also be applicable on purchase of product(s) by the
-                Cardholders under an exchange offer.
+                {t.Thepurchaseoftheproductswillbegovernedbythetermsofsale}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                While the offers are separate for all categories, max discount
-                per card would be 2000 rupees only (which is the highest of all
-                the discounts for different categories)
+                {t.Whiletheoffersareseparateforallcategories}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The Instant Discount would not be applicable on payment made by
-                Cardholders using the 'Cash on Delivery' payment option.
+                {t.TheInstantDiscountwouldnotbe}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The Offer is also valid on EMI (equated monthly installment)
-                transactions. Minimum transaction needed to avail EMI on Amazon
-                for BOB credit cards is INR 2500.
+                {t.TheOfferisalsovalidonEMI}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                In case there are multiple items in a purchase order, the
-                item-wise savings/discount may vary. However, the overall
-                savings/discount on the purchase order will be equivalent to
-                maximum savings / discount the Cardholder is eligible for under
-                this Offer.
+                {t.Incasetherearemultipleitemsinapurchaseordertheitemwisesavingsdiscountmayvary}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                In the event the order is returned or cancelled by the
-                Cardholder, seller or Amazon Seller Services Private Limited,
-                for any reason whatsoever, and subsequently the order / purchase
-                transaction value falls below INR 7000 (and INR 2000 for Fashion
-                category) per transaction on the order will not qualify for this
-                Offer and the participation of the Cardholder will be deemed
-                withdrawn.
+                {t.Intheeventtheorderisreturnedorcancelledby}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                If Instant Discount is availed on any purchase, and the
-                transaction is subsequently cancelled, the refund amount of such
-                orders will be post adjusting the instant discount amount
-                availed on the purchase.
+                {t.IfInstantDiscountisavailedonanypurchaseandthe}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Amazon reserves the right, at any time, without prior notice,
-                without liability, and without assigning any reason whatsoever,
-                to add/alter/modify/change or vary all of these Offer Terms or
-                to replace, wholly or in part, this Offer by another offer,
-                whether similar to this Offer or not.
+               {t.Amazonreservestherightatanytimewithoutpriornotice}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Nothing contained herein amounts to a commitment by Amazon or
-                the Bank to conduct further, similar or other offers.
+                {t.Nothingcontainedhereinamountstoacommitment}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The above Offer is by way of a special offer and nothing
-                contained herein shall prejudice or affect the terms and
-                conditions of the card member agreement (if any executed by the
-                Bank). The terms of the above schemes shall be in addition to
-                and not in derogation of the terms contained in the card member
-                agreement.
+              {t.TheaboveOfferisbywayofaspecialofferandnothingcontainedhereinwillprejudice}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Delinquent and over-limit Bank's credit Card members will not
-                qualify for this Offer.
+                {t.DelinquentandoverlimitBankscreditcardmemberswillnotqualify}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                This Offer is not valid on corporate or commercial cards issued
-                by Bank.
+                {t.ThisOfferisnotvalidoncorporateorcommercialCards}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                All disputes between the Cardholders and the Bank will be
-                resolved inter se and Amazon will not (nor will be liable or
-                obliged to) mediate or resolve any dispute or disagreement
-                between the Cardholders and the Bank.
+                {t.AlldisputesbetweentheCardholdersandthe}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                This Offer cannot be availed on: (i) purchase of the ineligible
-                / excluded products mentioned above; or (ii) purchase by
-                Cardholder using any card other than the Card (mentioned above).
+                {t.ThisOffercannotbeavailedon}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Under no circumstances, will the cashback being offered under
-                this Offer be settled in cash in lieu thereof by Amazon.
+                {t.Undernocircumstances}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                By participating in this Offer, every Cardholder expressly
-                agrees that Amazon or any of its affiliates will not be liable
-                or responsible for any loss or damage whatsoever that a
-                Cardholder may suffer, directly or indirectly, in connection
-                with this Offer, including but not limited to that associated
-                with his/her use or delivery or misuse of any product purchased
-                on Amazon.in.
+                {t.ByparticipatinginthisOffereveryCardholderexpresslyagreesthatBank}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                These Offer Terms are governed by the laws of India and the
-                courts at New Delhi will have exclusive jurisdiction over any
-                matters/disputes arising out of or in relation to these Offer
-                Terms.
+                {t.TheseOfferTermsaregovernedbythelawsofIndiaandthecourtsatNewDelhi}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                The Cardholders are not bound in any way to participate in this
-                Offer. Any participation is voluntary and the Offer is being
-                made purely on a best effort basis.
+                {t.TheCardholdersarenotboundinanyway}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Any person availing this Offer shall be deemed to have accepted
-                these Offer Terms.
+                {t.AnypersonavailingthisOfferwillbedeemedtohaveaccepted}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                Some products might not be eligible for the offer. Please check
-                the product detail page for offer eligibility.
+               {t.Someproductsmightnotbeeligiblefor}
               </Typography>
             </li>
           </ol>
@@ -1303,55 +1058,53 @@ export const BankOfferModal = (props) => {
           <br />
           <Divider className={classes.divider} />
           <Typography className={classes.availOffer}>
-            How to avail offer
+            {t.Howtoavailoffer}
           </Typography>
           <ul className={classes.ulTerms}>
             <li className={classes.offerDesc}>
-              Select eligible card at the time of checkout
+              {t.Selecteligiblecardatthetimeofcheckout}
             </li>
             <li className={classes.offerDesc}>
-              No promo code required to avail the offer
+              {t.Nopromocoderequiredtoavailtheoffer}
             </li>
           </ul>
         </div>
       )}
       {!backShow && (
         <div className={classes.body}>
-          <Typography className={classes.offerTitle}>Offer 1</Typography>
+          <Typography className={classes.offerTitle}>{t.OfferOne}</Typography>
           <Typography className={classes.offerDesc}>
-            5% Instant Discount up to INR 250 on HSBC Cashback Card Credit Card
-            Transactions. Minimum purchase value INR 1000
+           {t.InstantDiscountuptoINRonHSBCCashbackCardCreditCard}
           </Typography>
           <Typography
             className={classes.btn}
             onClick={() => showOffer1(!offer1)}
           >
-            See details
+            {t.Seedetails}
             <BiChevronRight className={classes.rightIcon} />
           </Typography>
           <Divider className={classes.divider} />
-          <Typography className={classes.offerTitle}>Offer 2</Typography>
+          <Typography className={classes.offerTitle}>{t.Offertwo}</Typography>
           <Typography className={classes.offerDesc}>
-            10% Instant Discount up to INR 500 on Bank of Baroda Credit Card
-            Transactions. Minimum purchase value INR 2000
+            {t.InstantDiscountuptoINRonBankofBarodaCreditCardTransactions}
           </Typography>
           <Typography
             className={classes.btn}
             onClick={() => showOffer2(!offer2)}
           >
-            See details
+            {t.Seedetails}
             <BiChevronRight className={classes.rightIcon} />
           </Typography>
           <Divider className={classes.divider} />
           <Typography className={classes.availOffer}>
-            How to avail offer
+           {t.Howtoavailoffer}
           </Typography>
           <ul className={classes.ulTerms}>
             <li className={classes.offerDesc}>
-              Select eligible card at the time of checkout
+              {t.Selecteligiblecardatthetimeofcheckout}
             </li>
             <li className={classes.offerDesc}>
-              No promo code required to avail the offer
+              {t.Nopromocoderequiredtoavailtheoffer}
             </li>
           </ul>
         </div>
@@ -1360,11 +1113,13 @@ export const BankOfferModal = (props) => {
   );
 };
 export const PartnerOffersModal = (props) => {
+  const getLanguage = useSelector((state) => state.language.lang);
+  const t = translations.get(getLanguage);
   const classes = useStyles();
   return (
     <div>
       <div className={classes.headerDiv}>
-        <Typography className={classes.header}>Partner Offers</Typography>
+        <Typography className={classes.header}>{t.partnerOffer}</Typography>
         <Button
           className={classes.close}
           onClick={() => {
@@ -1376,43 +1131,37 @@ export const PartnerOffersModal = (props) => {
       </div>
       <div className={classes.body}>
         <Typography className={classes.partnerHeading}>
-          Get GST invoice and save up to 28% on business purchases.{" "}
+          {t.getGstInvoiceAndSaveUp}{" "}
           <a
             href="https://www.amazon.in/business/register/org/landing"
             target="blank"
             className={classes.amazonLink}
           >
-            Sign up for free
+            {t.Signupforfree}
           </a>
         </Typography>
         <div className={classes.promotionTermsDiv}>
           <Typography className={classes.promotionTerms}>
-            Promotion Terms
+            {t.promotionTerms}
           </Typography>
           <Typography className={classes.termsInnerHeading}>
-            Amazon Business provides purchasing solutions that lets registered
-            businesses shop for business supplies on Amazon.
+           {t.AmazonBusinessprovides}
           </Typography>
           <Typography className={classes.termsBody}>
-            Additionally, you will receive business invoices which would list
-            your company/organization name, GST number (if applicable) and
-            Purchase Order (PO) number (provided you have added the PO number
-            while ordering).
+            {t.Additionallyyouwill}
           </Typography>
           <Typography className={classes.termsBody}>
-            Want to register for free? Here’s how:
+            {t.Wanttoregister}
           </Typography>
           <ol className={classes.ol}>
             <li>
               <Typography className={classes.termsBody}>
-                Create a free business account
+                {t.Createa}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                To register your business, you either need to create a new
-                business account on Amazon.in or convert your existing personal
-                account on Amazon.in to a business account.
+               {t.Toregisteryourbusiness}
               </Typography>
             </li>
             <Typography className={classes.termsInnerHeading}>Note:</Typography>
@@ -1420,36 +1169,29 @@ export const PartnerOffersModal = (props) => {
             <Typography
               className={`${classes.termsBody} ${classes.noteMargin}`}
             >
-              - If you’re converting your Mobile Only Account (MOA) to a
-              business account, then you will be required to add an email
-              address. Once your business is registered, you either use your
-              mobile number or email address to login.
+              {t.Ifyoureconverting}
             </Typography>
             <Typography
               className={`${classes.termsBody} ${classes.noteMargin}`}
             >
-              - You won’t be able to register your business if you don’t have a
-              valid GST number.
+              {t.Youwontbeable}
             </Typography>
             <Typography
               className={`${classes.termsBody} ${classes.noteMargin}`}
             >
-              - Keep your GST certificate handy as you will be prompted to enter
-              few details from the certificate.
+             {t.KeepyourGST}
             </Typography>
 
             <li>
               <Typography
                 className={`${classes.termsBody} ${classes.listItem}`}
               >
-                To go through the frequently asked questions (FAQs), visit:
-                Amazon Business - FAQs
+               {t.Togothrough}
               </Typography>
             </li>
             <li>
               <Typography className={classes.termsBody}>
-                To go through Amazon Business Accounts Terms and Conditions
-                (T&Cs), visit: Amazon Business – T&Cs
+               {t.TogothroughAmazon}
               </Typography>
             </li>
           </ol>

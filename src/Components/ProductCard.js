@@ -8,6 +8,8 @@ import {
 import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
 import { Button } from "@material-ui/core";
+import {  useSelector } from "react-redux";
+import { translations } from "./../translate/translate";
 const useStyles = makeStyles((theme) => ({
   main: {
     height: "58vh",
@@ -92,6 +94,12 @@ const useStyles = makeStyles((theme) => ({
   rating: {
     display: "flex",
     alignItems: "center",
+
+  },
+  mrating: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
   },
   count: {
     marginLeft: "0.5rem",
@@ -139,6 +147,8 @@ const rupeeCalculate = (val) => {
   return dec;
 };
 const ProductCard = ({ item }) => {
+  const getLanguage = useSelector((state) => state.language.lang);
+  const t = translations.get(getLanguage);
   const theme = useTheme();
 
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
@@ -166,7 +176,7 @@ const ProductCard = ({ item }) => {
             {hover && (
               <div className={classes.mHoverText}>
                 {" "}
-                <Typography>Quick Look</Typography>
+                <Typography>{t.quickLook}</Typography>
               </div>
             )}
           </div>
@@ -184,7 +194,7 @@ const ProductCard = ({ item }) => {
             </Typography>
             <span
               title={item.rating.rate + " out of 5"}
-              className={classes.rating}
+              className={classes.mrating}
             >
               <StarRatings
                 rating={item.rating.rate}
@@ -199,7 +209,7 @@ const ProductCard = ({ item }) => {
               </Typography>
             </span>
           </div>
-          <Button className={classes.mAddToCart}>Show Now</Button>
+          <Button className={classes.mAddToCart}>{t.showNow}</Button>
         </>
       ) : (
         <>
@@ -210,7 +220,7 @@ const ProductCard = ({ item }) => {
             {hover && (
               <div className={classes.hoverText}>
                 {" "}
-                <Typography>Quick Look</Typography>
+                <Typography>{t.quickLook}</Typography>
               </div>
             )}
           </div>
@@ -237,7 +247,7 @@ const ProductCard = ({ item }) => {
               </Typography>
             </span>
           </div>
-          <Button className={classes.addToCart}>Show Now</Button>
+          <Button className={classes.addToCart}>{t.showNow}</Button>
         </>
       )}
     </Card>
