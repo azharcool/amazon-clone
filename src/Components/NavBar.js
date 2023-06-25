@@ -319,14 +319,16 @@ function NavBar() {
                   <Search className={classes.mSearchIcon} />
                 </Button>
               </div>
+              
 
               <Link to="/Cart" className={classes.scart}>
                 <div className={classes.header_cart}>
                   <ShoppingCartOutlinedIcon className={classes.cartIcon} />
                   <p className={classes.cartItems}>{cartCount}</p>
                 </div>
-                Cart
+                {t.cart}
               </Link>
+             
               <DrawerComp
                 style={{
                   display: "flex",
@@ -348,9 +350,9 @@ function NavBar() {
                   />
                 </div>
                 <div>
-                  <Typography className={classes.text}>Hello {name}</Typography>
+                  <Typography className={classes.text}>{t.hello} {name}</Typography>
                   <Typography className={classes.text2}>
-                    Select your address
+                    {t.selectYourAddress}
                   </Typography>
                 </div>
               </div>
@@ -427,7 +429,7 @@ function NavBar() {
               {name ? (
                 <div className={classes.headerButton} onClick={onSignOut}>
                   <Typography className={classes.text}>{t.hello} {name}</Typography>
-                  <Typography className={classes.text2}>Sign out</Typography>
+                  <Typography className={classes.text2}>{t.signOut}</Typography>
                 </div>
               ) : (
                 <Link to="/Login" className={classes.linkBtn}>
@@ -442,7 +444,7 @@ function NavBar() {
                       }}
                       className={classes.text}
                     >
-                    {t.hello} {t.guest}
+                    {t.helloGuest}
                     </Typography>
                     <Typography
                       sx={{
@@ -453,22 +455,22 @@ function NavBar() {
                       }}
                       className={classes.text2}
                     >
-                      Sign in
+                      {t.signIn}
                     </Typography>
                   </div>
                 </Link>
               )}
 
               <div className={classes.headerButton}>
-                <Typography className={classes.text}>Returns</Typography>
-                <Typography className={classes.text2}>& Orders</Typography>
+                <Typography className={classes.text}>{t.returns}</Typography>
+                <Typography className={classes.text2}>{t.orders}</Typography>
               </div>
               <Link to="/Cart" className={classes.cart}>
                 <div className={classes.header_cart}>
                   <ShoppingCartOutlinedIcon className={classes.cartIcon} />
                   <p className={classes.cartItems}>{cartCount}</p>
                 </div>
-                Cart
+                {t.cart}
               </Link>
             </>
           )}

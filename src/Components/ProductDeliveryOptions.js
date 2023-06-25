@@ -7,6 +7,8 @@ import { SiDropbox } from "react-icons/si";
 import { Popover } from "react-tiny-popover";
 import { MdDangerous } from "react-icons/md";
 import { BsCamera } from "react-icons/bs";
+import { translations } from "./../translate/translate";
+import {  useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   main: {
@@ -125,6 +127,8 @@ const useStyles = makeStyles({
 });
 
 function ProductDeliveryOptions() {
+  const getLanguage = useSelector((state) => state.language.lang);
+  const t = translations.get(getLanguage);
   const  theme = useTheme();
 
   const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
@@ -147,7 +151,7 @@ function ProductDeliveryOptions() {
           <div className={classes.mPopover}>
             <div className={classes.mPopoverHeader}>
               <Typography className={classes.mHeading}>
-                What is Cash on Delivery (Cash/Card)?
+               {t.whatIsCashOnDelivery}
               </Typography>
               <Typography
                 className={classes.mClose}
@@ -159,8 +163,7 @@ function ProductDeliveryOptions() {
               </Typography>
             </div>
             <Typography className={classes.mDescription}>
-              Cash on Delivery (COD) payment includes both cash as well as Debit
-              card/Credit card/Net banking payments at your doorstep.
+          {t.cashOnDeliveryPaymentInclude}
             </Typography>
           </div>
         )}
@@ -172,7 +175,7 @@ function ProductDeliveryOptions() {
           }}
         >
           <GiTakeMyMoney className={classes.mIcon} />
-          <Typography className={classes.mText}>Cash on Delivery</Typography>
+          <Typography className={classes.mText}>{t.cashOnDelivery}</Typography>
         </div>
       </Popover>
 
@@ -186,7 +189,7 @@ function ProductDeliveryOptions() {
           <div className={classes.mPopover}>
             <div className={classes.mPopoverHeader}>
               <Typography className={classes.mHeading}>
-                Not Returnable
+                {t.notReturnable}
               </Typography>
               <Typography
                 className={classes.mClose}
@@ -199,15 +202,14 @@ function ProductDeliveryOptions() {
             </div>
             <div>
               <Typography className={classes.mDescription}>
-                This item is non-returnable due to the nature of the product.
+                {t.thisItemIsNotReturnableDueToNature}
               </Typography>
               <div className={classes.returnDiv}>
                 <div className={classes.returnIconDiv}>
                   <MdDangerous className={classes.returnIcons} />
                 </div>
                 <Typography className={classes.mDescription}>
-                  For damaged, defective, wrong or expired item you can request
-                  for a refund or replacement within 5 days of delivery.
+                  {t.forDamagedDefectiveWrong}
                 </Typography>
               </div>
               <div className={classes.returnDiv}>
@@ -215,8 +217,7 @@ function ProductDeliveryOptions() {
                   <BsCamera className={classes.returnIcons} />
                 </div>
                 <Typography className={classes.mDescription}>
-                  You will need to share the images of the item and its defects
-                  through Your Orders for a refund or replacement.
+                 {t.youWillNeedToShareIMG}
                 </Typography>
               </div>
             </div>
@@ -230,7 +231,7 @@ function ProductDeliveryOptions() {
           }}
         >
           <SiDropbox className={classes.mIcon} />
-          <Typography className={classes.mText}>Not Returnable</Typography>
+          <Typography className={classes.mText}>{t.notReturnable}</Typography>
         </div>
       </Popover>
 
@@ -244,7 +245,7 @@ function ProductDeliveryOptions() {
           <div className={classes.mPopover}>
             <div className={classes.mPopoverHeader}>
               <Typography className={classes.mHeading}>
-                Amazon Delivered
+               {t.amazonDeliverd}
               </Typography>
               <Typography
                 className={classes.mClose}
@@ -256,8 +257,7 @@ function ProductDeliveryOptions() {
               </Typography>
             </div>
             <Typography className={classes.mDescription}>
-              Amazon directly manages delivery for this product. Order delivery
-              tracking to your doorstep is available.
+              {t.amazonDirectlyManagedDelivery}
             </Typography>
           </div>
         )}
@@ -269,7 +269,7 @@ function ProductDeliveryOptions() {
           }}
         >
           <TbTruckDelivery className={classes.mIcon} />
-          <Typography className={classes.mText}>Amazon Delivered</Typography>
+          <Typography className={classes.mText}>{t.amazonDeliverd}</Typography>
         </div>
       </Popover>
 
@@ -283,7 +283,7 @@ function ProductDeliveryOptions() {
           <div className={classes.mPopover}>
             <div className={classes.mPopoverHeader}>
               <Typography className={classes.mHeading}>
-                1 Year Warranty
+                {t.oneYearWarranty}
               </Typography>
               <Typography
                 className={classes.mClose}
@@ -295,7 +295,7 @@ function ProductDeliveryOptions() {
               </Typography>
             </div>
             <Typography className={classes.mDescription}>
-              1 year on product
+              {t.oneYearOnProduct}
             </Typography>
           </div>
         )}
@@ -307,7 +307,7 @@ function ProductDeliveryOptions() {
           }}
         >
           <BsShieldCheck className={classes.mIcon} />
-          <Typography className={classes.mText}>1 Year Warranty</Typography>
+          <Typography className={classes.mText}> {t.oneYearWarranty}</Typography>
         </div>
       </Popover>
       </>
@@ -323,7 +323,7 @@ function ProductDeliveryOptions() {
           <div className={classes.popover}>
             <div className={classes.popoverHeader}>
               <Typography className={classes.heading}>
-                What is Cash on Delivery (Cash/Card)?
+                {t.whatIsCashOnDelivery}
               </Typography>
               <Typography
                 className={classes.close}
@@ -335,8 +335,7 @@ function ProductDeliveryOptions() {
               </Typography>
             </div>
             <Typography className={classes.description}>
-              Cash on Delivery (COD) payment includes both cash as well as Debit
-              card/Credit card/Net banking payments at your doorstep.
+              {t.cashOnDeliveryPaymentInclude}
             </Typography>
           </div>
         )}
@@ -348,7 +347,7 @@ function ProductDeliveryOptions() {
           }}
         >
           <GiTakeMyMoney className={classes.icon} />
-          <Typography className={classes.text}>Cash on Delivery</Typography>
+          <Typography className={classes.text}>{t.cashOnDelivery}</Typography>
         </div>
       </Popover>
 
@@ -362,7 +361,7 @@ function ProductDeliveryOptions() {
           <div className={classes.popover}>
             <div className={classes.popoverHeader}>
               <Typography className={classes.heading}>
-                Not Returnable
+               {t.notReturnable}
               </Typography>
               <Typography
                 className={classes.close}
@@ -375,15 +374,15 @@ function ProductDeliveryOptions() {
             </div>
             <div>
               <Typography className={classes.description}>
-                This item is non-returnable due to the nature of the product.
+                
+                {t.thisItemIsNotReturnableDueToNature}
               </Typography>
               <div className={classes.returnDiv}>
                 <div className={classes.returnIconDiv}>
                   <MdDangerous className={classes.returnIcons} />
                 </div>
                 <Typography className={classes.description}>
-                  For damaged, defective, wrong or expired item you can request
-                  for a refund or replacement within 5 days of delivery.
+                  {t.forDamagedDefectiveWrong}
                 </Typography>
               </div>
               <div className={classes.returnDiv}>
@@ -391,8 +390,7 @@ function ProductDeliveryOptions() {
                   <BsCamera className={classes.returnIcons} />
                 </div>
                 <Typography className={classes.description}>
-                  You will need to share the images of the item and its defects
-                  through Your Orders for a refund or replacement.
+                  {t.youWillNeedToShareIMG}
                 </Typography>
               </div>
             </div>
@@ -406,7 +404,7 @@ function ProductDeliveryOptions() {
           }}
         >
           <SiDropbox className={classes.icon} />
-          <Typography className={classes.text}>Not Returnable</Typography>
+          <Typography className={classes.text}>{t.notReturnable}</Typography>
         </div>
       </Popover>
 
@@ -420,7 +418,7 @@ function ProductDeliveryOptions() {
           <div className={classes.popover}>
             <div className={classes.popoverHeader}>
               <Typography className={classes.heading}>
-                Amazon Delivered
+                {t.amazonDeliverd}
               </Typography>
               <Typography
                 className={classes.close}
@@ -432,8 +430,7 @@ function ProductDeliveryOptions() {
               </Typography>
             </div>
             <Typography className={classes.description}>
-              Amazon directly manages delivery for this product. Order delivery
-              tracking to your doorstep is available.
+              {t.amazonDirectlyManagedDelivery}
             </Typography>
           </div>
         )}
@@ -445,7 +442,7 @@ function ProductDeliveryOptions() {
           }}
         >
           <TbTruckDelivery className={classes.icon} />
-          <Typography className={classes.text}>Amazon Delivered</Typography>
+          <Typography className={classes.text}>{t.amazonDeliverd}</Typography>
         </div>
       </Popover>
 
@@ -459,7 +456,7 @@ function ProductDeliveryOptions() {
           <div className={classes.popover}>
             <div className={classes.popoverHeader}>
               <Typography className={classes.heading}>
-                1 Year Warranty
+                {t.oneYearWarranty}
               </Typography>
               <Typography
                 className={classes.close}
@@ -471,7 +468,7 @@ function ProductDeliveryOptions() {
               </Typography>
             </div>
             <Typography className={classes.description}>
-              1 year on product
+              {t.oneYearOnProduct}
             </Typography>
           </div>
         )}
@@ -483,7 +480,7 @@ function ProductDeliveryOptions() {
           }}
         >
           <BsShieldCheck className={classes.icon} />
-          <Typography className={classes.text}>1 Year Warranty</Typography>
+          <Typography className={classes.text}>{t.oneYearWarranty}</Typography>
         </div>
       </Popover>
       </>}

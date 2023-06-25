@@ -18,6 +18,8 @@ import AddNewProductToCartAction from "../Actions/AddNewProductToCartAction";
 import AddExistingProductToCartAction from "../Actions/AddExistingProductToCartAction";
 import { useDispatch, useSelector } from "react-redux";
 
+import { translations } from "./../translate/translate";
+
 const useStyles = makeStyles({
   main: {
     marginTop: "3rem",
@@ -58,8 +60,8 @@ const useStyles = makeStyles({
     width: "22vw",
   },
   mImage: {
-    height: "60vh",
-    width: "28vw",
+    height: "25vh",
+    width: "25vw",
    
   },
   productInfo: {
@@ -196,6 +198,8 @@ const useStyles = makeStyles({
   },
 });
 const ProductDescription = () => {
+  const getLanguage = useSelector((state) => state.language.lang);
+  const t = translations.get(getLanguage);
   const  theme = useTheme();
 
   const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
@@ -270,7 +274,7 @@ const ProductDescription = () => {
           </a>
           <Link to="/" className={classes.link}>
             <Button className={classes.backBtn}>
-              <BiChevronLeft /> <Typography>Back to products</Typography>
+              <BiChevronLeft /> <Typography>{t.backToProduct}</Typography>
             </Button>
           </Link>
             <div style={{display:"flex",justifyContent:"center"}}>
@@ -319,7 +323,7 @@ const ProductDescription = () => {
                   {rupeeCalculate(product.price * 79.67).toLocaleString()}
                 </Typography>
                 <Typography className={classes.mTaxes}>
-                  Inclusive of all taxes
+                {t.inclusiveOfAllTaxes}
                 </Typography>
               </div>
               </div>
@@ -338,10 +342,10 @@ const ProductDescription = () => {
               <ProductDeliveryOptions />
               </div>
               <Divider className={classes.divider} />
-              <div style={{display:"flex",justifyContent:"center",paddingLeft:"5rem"}}>
+              <div style={{display:"flex",justifyContent:"left",paddingLeft:"5rem"}}>
               <div className={classes.descriptionDiv}>
                 <Typography className={classes.description}>
-                  About this item
+                  {t.aboutThisItem}
                 </Typography>
 
                 {descriptionArray(product.description).map((items, i) => {
@@ -362,7 +366,7 @@ const ProductDescription = () => {
               <div style={{display:"flex",justifyContent:"center"}}>
               <div className={classes.mQuantityDiv}>
                 <div style={{ display: "flex", alignItems: "center",justifyContent:"center" }}>
-                  <Typography style={{fontSize:"1.2rem"}}>Quantity: </Typography>
+                  <Typography style={{fontSize:"1.2rem"}}>{t.quantity} </Typography>
                   <select
                     name="ItemQuantity"
                     id="ItemQuantityId"
@@ -385,7 +389,7 @@ const ProductDescription = () => {
                 <Link to="AddedToCart" className={classes.linkStyle}>
                 <div style={{display:"flex",justifyContent:"center"}}>
                   <Button className={classes.mAddToCart} onClick={addToCart}>
-                    Add to Cart
+                    {t.addtocart}
                   </Button>
                   </div>
                 </Link>
@@ -404,7 +408,7 @@ const ProductDescription = () => {
           </a>
           <Link to="/" className={classes.link}>
             <Button className={classes.backBtn}>
-              <BiChevronLeft /> <Typography>Back to products</Typography>
+              <BiChevronLeft /> <Typography>{t.backToProduct}</Typography>
             </Button>
           </Link>
             <div className={classes.productInfo}>
@@ -449,13 +453,13 @@ const ProductDescription = () => {
                   {rupeeCalculate(product.price * 79.67).toLocaleString()}
                 </Typography>
                 <Typography className={classes.taxes}>
-                  Inclusive of all taxes
+                 {t.inclusiveOfAllTaxes}
                 </Typography>
               </div>
               <Divider className={classes.divider} />
               <div className={classes.offersDiv}>
                 <Typography className={classes.offerTitle}>
-                  <TbDiscount2 className={classes.offerIcon} /> Offers
+                  <TbDiscount2 className={classes.offerIcon} />{t.offers}
                 </Typography>
                 <Offers />
               </div>
@@ -464,7 +468,7 @@ const ProductDescription = () => {
               <Divider className={classes.divider} />
               <div className={classes.descriptionDiv}>
                 <Typography className={classes.description}>
-                  About this item
+                  {t.aboutThisItem}
                 </Typography>
                 {descriptionArray(product.description).map((items, i) => {
                   items =
@@ -480,7 +484,7 @@ const ProductDescription = () => {
               <Divider className={classes.divider} />
               <div className={classes.quantityDiv}>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <Typography>Quantity: </Typography>
+                  <Typography>{t.quantity} </Typography>
                   <select
                     name="ItemQuantity"
                     id="ItemQuantityId"
@@ -502,7 +506,7 @@ const ProductDescription = () => {
                 </div>
                 <Link to="AddedToCart" className={classes.linkStyle}>
                   <Button className={classes.addToCart} onClick={addToCart}>
-                    Add to Cart
+                    {t.addtocart}
                   </Button>
                 </Link>
               </div>

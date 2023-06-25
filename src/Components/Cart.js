@@ -29,38 +29,28 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
   mLeftDiv: {
-    margin: "2rem 3rem",
-    width: "60rem",
-    marginRight: "2rem",
-    
     alignContent: "center",
-   
   },
   mRightDiv: {
-   marginLeft:"3rem",
-  marginTop:"-23px",
+    marginTop: "-23px",
     background: "white",
     height: "10rem",
-    width:"43rem",
-    padding: "2rem",
+
     borderRadius: "0.2rem",
-   paddingLeft:"15rem",
   },
   mLowerRightDiv: {
-    marginLeft: "3rem",
-    marginTop:"0px",
+    marginTop: "0px",
     top: "0px",
     background: "white",
-    width:"60rem",
+
     height: "5rem",
-    
+
     borderRadius: "0.2rem",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   mInnerleftDiv: {
-    padding: "1rem",
     background: "white",
     marginTop: "2rem",
   },
@@ -69,23 +59,21 @@ const useStyles = makeStyles({
     marginTop: "2rem",
   },
   mDivider: {
-    margin: "0.7rem 0",
     height: "0.1rem",
     color: "#DDDDDD",
   },
   mHeading: {
     fontSize: "2rem",
+    paddingLeft: "2rem",
+    paddingTop: "2rem",
   },
   mNoItemsDiv: {
-    margin: "2rem",
-    padding: "1rem",
     background: "white",
     display: "flex",
-    width: "80%",
+
     height: "40vh",
   },
   mNoItems: {
-    margin: "1rem 2rem",
     fontSize: "2rem",
     fontWeight: "bold",
   },
@@ -95,13 +83,9 @@ const useStyles = makeStyles({
   },
   mGoToProducts: {
     fontSize: "1.3rem",
-    margin: "3rem 2rem",
   },
   mSubTotal: {
     textAlign: "end",
-    paddingRight: "1rem",
-    
-   
   },
   mSubTotalText: {
     fontSize: "1.7rem",
@@ -109,17 +93,15 @@ const useStyles = makeStyles({
   },
   mFreeDelivery: {
     color: "#067D62",
-    fontSize: "0.85rem",
+
     fontSize: "1.2rem",
   },
   mCheckIcon: {
     color: "#067D62",
-    marginRight: "0.5rem",
+
     fontSize: "2rem",
   },
   mCheckoutText: {
-    fontSize: "0.85rem",
-    marginLeft: "1.5rem",
     fontSize: "1.5rem",
   },
   mCheckoutLink: {
@@ -144,23 +126,24 @@ const useStyles = makeStyles({
   mClearCart: {
     fontSize: "1.5rem",
     color: "#007185",
-     
+    padding: "2rem",
+
     "&:hover": {
       cursor: "pointer",
       color: "#C7511F",
       textDecoration: "underline",
     },
   },
-  mFooter:{
-   padding:"2rem 2rem 2rem 2rem",
-   fontSize:"1rem",
-   paddingRight:"4rem",
-  
-  
+  mFooter: {
+    display: "flex",
+    justifyContent: "center",
+    fontSize: "1rem",
+    padding: "2rem",
   },
   leftDiv: {
     margin: "2rem 1rem",
     width: "72%",
+    height: "auto",
   },
   rightDiv: {
     margin: "2rem 1rem",
@@ -182,7 +165,6 @@ const useStyles = makeStyles({
   innerleftDiv: {
     padding: "1rem",
     background: "white",
-   
   },
   footer: {
     fontSize: "0.8rem",
@@ -292,196 +274,208 @@ function Cart() {
   const t = translations.get(getLanguage);
   return (
     <div className={classes.main}>
-    {isMatch ?
-      <div className={classes.mDiv}>
-      <div className={classes.mLeftDiv}>
-        {cartItems.length === 0 ? (
-          <div className={classes.mNoItemsDiv}>
-            <img src={emptyCart} alt="" />
-            <div>
-              <Typography className={classes.mNoItems}>
-                Your Amazon Cart is empty
-              </Typography>
-              <Link to="/" className={classes.mLink}>
-                <Typography className={classes.mGoToProducts}>
-                  Show Products
-                </Typography>
-              </Link>
-            </div>
-          </div>
-        ) : (
-          <div className={classes.mInnerleftDiv}>
-            <Typography className={classes.mHeading}>Shopping Cart</Typography>
-
-            {cartItems.map((item, i) => {
-              return (
-                <div key={i}>
-                  <Divider className={classes.mDivider} />
-                  <CartProductCard details={item} key={i} />
+      {isMatch ? (
+        <div className={classes.mDiv}>
+          <div className={classes.mLeftDiv}>
+            {cartItems.length === 0 ? (
+              <div className={classes.mNoItemsDiv}>
+                <img src={emptyCart} alt="" />
+                <div>
+                  <Typography className={classes.mNoItems}>
+                    {t.yourAmazonCartIsEmpty}
+                  </Typography>
+                  <Link to="/" className={classes.mLink}>
+                    <Typography className={classes.mGoToProducts}>
+                      {t.showProducts}
+                    </Typography>
+                  </Link>
                 </div>
-              );
-            })}
-            
-          </div>
-        )}
-        
-        </div>
-        {cartItems.length !== 0 && (
-          <div >
-            <div className={classes.mRightDiv}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <FaCheckCircle className={classes.mCheckIcon} />
-                <Typography className={classes.mFreeDelivery}>
-                  Your order is eligible for FREE Delivery.
-                </Typography>
               </div>
-              <Typography className={classes.mCheckoutText}>
-                Select this option at checkout.{" "}
-                <a
-                  href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200904360&pop-up=1"
-                  target="blank"
-                  className={classes.mCheckoutLink}
-                >
-                  Details
-                </a>
-              </Typography>
-              <Typography className={classes.mSubTotalText}>
-                Subtotal ({cartCount} items) :{" "}
-                <b>₹ {calcTotal().toLocaleString()}</b>
-              </Typography>
-              <CheckoutButton quantity={0} />
-            </div>
-            <div className={classes.mLowerRightDiv}>
-              <Link to="/" className={classes.mLink}>
-                <Typography className={classes.mContinueShopping}>
-                  Continue Shopping
+            ) : (
+              <div className={classes.mInnerleftDiv}>
+                <Typography className={classes.mHeading}>
+                  {t.ShoppingCart}
                 </Typography>
-              </Link>
+
+                {cartItems.map((item, i) => {
+                  return (
+                    <div key={i}>
+                      <Divider className={classes.mDivider} />
+                      <CartProductCard details={item} key={i} />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+          {cartItems.length !== 0 && (
+            <div>
+              <div className={classes.mRightDiv}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FaCheckCircle className={classes.mCheckIcon} />
+                  <Typography className={classes.mFreeDelivery}>
+                    {t.yourOrderEligibleForFreeDelivery}
+                  </Typography>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography className={classes.mCheckoutText}>
+                    {t.selectThisOptionAtCheckout}{" "}
+                    <a
+                      href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200904360&pop-up=1"
+                      target="blank"
+                      className={classes.mCheckoutLink}
+                    >
+                      {t.details}
+                    </a>
+                  </Typography>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography className={classes.mSubTotalText}>
+                    {t.subTotal} ({cartCount} {t.items}) :{" "}
+                    <b>₹ {calcTotal().toLocaleString()}</b>
+                  </Typography>
+                  <CheckoutButton quantity={0} />
+                </div>
+              </div>
+
+              <div className={classes.mLowerRightDiv}>
+                <Link to="/" className={classes.mLink}>
+                  <Typography className={classes.mContinueShopping}>
+                    {t.continueShopping}
+                  </Typography>
+                </Link>
+              </div>
             </div>
-          </div>
-        )}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "start",
-            paddingLeft: "3rem",
-            paddingTop: "1rem",
-            
-          }}
-        >
-        {cartItems.length !== 0 && (
-          <Typography onClick={clearCart} className={classes.mClearCart}>
-            Clear Cart
-          </Typography>
-        )}
-          
-        </div>
-        <Typography className={classes.mFooter}>
-        The price and availability of items at Amazon.in are subject to
-        change. The shopping cart is a temporary place to store a list of your
-        items and reflects each item's most recent price. Do you have a
-        promotional code? We'll ask you to enter your claim code when it's
-        time to pay.
-      </Typography>
-       
-      
-      </div> 
-      :
-      <>
-      <div className={classes.leftDiv}>
-      {cartItems.length === 0 ? (
-        <div className={classes.noItemsDiv}>
-          <img src={emptyCart} alt="" />
-          <div>
-            <Typography className={classes.noItems}>
-              Your Amazon Cart is empty
-            </Typography>
-            <Link to="/" className={classes.link}>
-              <Typography className={classes.goToProducts}>
-                Show Products
+          )}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "start",
+              // paddingLeft: "3rem",
+              paddingTop: "1rem",
+            }}
+          >
+            {cartItems.length !== 0 && (
+              <Typography onClick={clearCart} className={classes.mClearCart}>
+                {t.clearCart}
               </Typography>
-            </Link>
+            )}
           </div>
+          <Typography className={classes.mFooter}>
+            {t.thePriceAndAvailabilityOfItem}
+          </Typography>
         </div>
       ) : (
-        <div className={classes.innerleftDiv}>
-          <Typography className={classes.heading}>Shopping Cart</Typography>
-
-          {cartItems.map((item, i) => {
-            return (
-              <div key={i}>
-                <Divider className={classes.divider} />
-                <CartProductCard details={item} key={i} />
+        <>
+          <div className={classes.leftDiv}>
+            {cartItems.length === 0 ? (
+              <div className={classes.noItemsDiv}>
+                <img src={emptyCart} alt="" />
+                <div>
+                  <Typography className={classes.noItems}>
+                    {t.yourAmazonCartIsEmpty}
+                  </Typography>
+                  <Link to="/" className={classes.link}>
+                    <Typography className={classes.goToProducts}>
+                      {t.showProducts}
+                    </Typography>
+                  </Link>
+                </div>
               </div>
-            );
-          })}
-          <div className={classes.subTotal}>
-            <Typography className={classes.subTotalText}>
-              Subtotal ({cartCount} items) :{" "}
-              <b>₹ {calcTotal().toLocaleString()}</b>
-            </Typography>
-          </div>
-        </div>
-      )}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "end",
-          paddingRight: "2rem",
-          paddingTop: "1rem",
-        
-        }}
-      >
-        {cartItems.length !== 0 && (
-          <Typography onClick={clearCart} className={classes.clearCart}>
-            Clear Cart
-          </Typography>
-        )}
-      </div>
-      <Typography className={classes.footer}>
-        The price and availability of items at Amazon.in are subject to
-        change. The shopping cart is a temporary place to store a list of your
-        items and reflects each item's most recent price. Do you have a
-        promotional code? We'll ask you to enter your claim code when it's
-        time to pay.
-      </Typography>
-    </div>
-    {cartItems.length !== 0 && (
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div className={classes.rightDiv}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <FaCheckCircle className={classes.checkIcon} />
-            <Typography className={classes.freeDelivery}>
-              Your order is eligible for FREE Delivery.
-            </Typography>
-          </div>
-          <Typography className={classes.checkoutText}>
-            Select this option at checkout.{" "}
-            <a
-              href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200904360&pop-up=1"
-              target="blank"
-              className={classes.checkoutLink}
+            ) : (
+              <div className={classes.innerleftDiv}>
+                <Typography className={classes.heading}>
+                  {t.ShoppingCart}
+                </Typography>
+
+                {cartItems.map((item, i) => {
+                  return (
+                    <div key={i}>
+                      <Divider className={classes.divider} />
+                      <CartProductCard details={item} key={i} />
+                    </div>
+                  );
+                })}
+                <div className={classes.subTotal}>
+                  <Typography className={classes.subTotalText}>
+                    {t.subTotal} ({cartCount} {t.items}) :{" "}
+                    <b>₹ {calcTotal().toLocaleString()}</b>
+                  </Typography>
+                </div>
+              </div>
+            )}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "end",
+
+                paddingTop: "1rem",
+              }}
             >
-              Details
-            </a>
-          </Typography>
-          <Typography className={classes.subTotalText}>
-            Subtotal ({cartCount} items) :{" "}
-            <b>₹ {calcTotal().toLocaleString()}</b>
-          </Typography>
-          <CheckoutButton quantity={0} />
-        </div>
-        <div className={classes.lowerRightDiv}>
-          <Link to="/" className={classes.link}>
-            <Typography className={classes.continueShopping}>
-              Continue Shopping
+              {cartItems.length !== 0 && (
+                <Typography onClick={clearCart} className={classes.clearCart}>
+                  {t.clearCart}
+                </Typography>
+              )}
+            </div>
+            <Typography className={classes.footer}>
+              {t.thePriceAndAvailabilityOfItem}
             </Typography>
-          </Link>
-        </div>
-      </div>
-    )}
-      </>}
-     
+          </div>
+          {cartItems.length !== 0 && (
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div className={classes.rightDiv}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <FaCheckCircle className={classes.checkIcon} />
+                  <Typography className={classes.freeDelivery}>
+                    {t.yourOrderEligibleForFreeDelivery}
+                  </Typography>
+                </div>
+                <Typography className={classes.checkoutText}>
+                  {t.selectThisOptionAtCheckout}{" "}
+                  <a
+                    href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200904360&pop-up=1"
+                    target="blank"
+                    className={classes.checkoutLink}
+                  >
+                    {t.details}
+                  </a>
+                </Typography>
+                <Typography className={classes.subTotalText}>
+                  {t.subTotal} ({cartCount} {t.items}) :{" "}
+                  <b>₹ {calcTotal().toLocaleString()}</b>
+                </Typography>
+                <CheckoutButton quantity={0} />
+              </div>
+              <div className={classes.lowerRightDiv}>
+                <Link to="/" className={classes.link}>
+                  <Typography className={classes.continueShopping}>
+                    {t.continueShopping}
+                  </Typography>
+                </Link>
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

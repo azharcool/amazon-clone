@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import SetCartFromLocalStorageAction from "./../Actions/SetCartFromLocalStorageAction";
 import { FaCheckCircle } from "react-icons/fa";
 import orderPlaced from "../Assets/images/testing.png";
+import { translations } from "./../translate/translate";
+
 
 const useStyles = makeStyles({
   main: {
@@ -90,6 +92,8 @@ const useStyles = makeStyles({
   },
 });
 function CheckoutSuccess() {
+  const getLanguage = useSelector((state) => state.language.lang);
+  const t = translations.get(getLanguage);
   const dispatch = useDispatch();
   const signedIn = useSelector((state) => state.signedIn);
   const user = useSelector((state) => state.user);
@@ -137,17 +141,17 @@ function CheckoutSuccess() {
           <div className={classes.left}>
             <Typography className={classes.orderPlaced}>
               <FaCheckCircle className={classes.checkIcon} />
-              Order placed, thank you!
+              {t.orderPlacedThankYou}
             </Typography>
             <Typography className={classes.confirmation}>
-              Confirmation will be sent to your email.
+              {t.confirmationWillBeSendToYourEmail}
             </Typography>
             <Typography className={classes.shippingTo}>
-              Shipping to {user.displayName}
+               {t.shippingTo}{user.displayName}
             </Typography>
             <Divider className={classes.divider} />
             <Typography className={classes.date}>{deliveryDate()}</Typography>
-            <Typography className={classes}>Delivery date</Typography>
+            <Typography className={classes}>{t.deliveryDate}</Typography>
           </div>
           <div className={classes.right}>
             <a href="https://www.primevideo.com/" target="blank">
@@ -157,7 +161,7 @@ function CheckoutSuccess() {
         </div>
       </div>
       <Link to="/" className={classes.link}>
-        <Button className={classes.buy}>Continue Shopping</Button>
+        <Button className={classes.buy}>{t.continueShopping}</Button>
       </Link>
     </div>
   );

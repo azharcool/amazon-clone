@@ -6,6 +6,8 @@ import { Popover } from "react-tiny-popover";
 import { BsGlobe } from "react-icons/bs";
 import { TiArrowUnsorted } from "react-icons/ti";
 import { Box } from "@mui/material";
+import {  useSelector } from "react-redux";
+import { translations } from "./../translate/translate";
 const useStyles = makeStyles({
   main: {
     width: "100%",
@@ -142,6 +144,7 @@ const useStyles = makeStyles({
 });
 
 function Footer() {
+  const getLanguage = useSelector((state) => state.language.lang);
   const classes = useStyles();
   const options = [
     "English - EN",
@@ -154,29 +157,29 @@ function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
+  const t = translations.get(getLanguage);
   return (
     <>
       <Box className={classes.main}>
         <Button onClick={scroll} className={classes.btn}>
-          Back to top
+          {t.Backtotop}
         </Button>
         <Box className={classes.parentDiv}>
           <Box className={classes.childDiv}>
-            <Typography className={classes.heading}>Get to Know Us</Typography>
+            <Typography className={classes.heading}>{t.GettoKnowUs}</Typography>
             <a
               href="https://www.aboutamazon.in/"
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>About Us</Typography>
+              <Typography className={classes.marginUp}>{t.AboutUs}</Typography>
             </a>
             <a
               href="https://amazon.jobs/"
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>Careers</Typography>
+              <Typography className={classes.marginUp}>{t.Careers}</Typography>
             </a>
             <a
               href="https://press.aboutamazon.in/"
@@ -184,7 +187,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Press Releases
+                {t.PressReleases}
               </Typography>
             </a>
             <a
@@ -192,14 +195,14 @@ function Footer() {
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>Amazon Cares</Typography>
+              <Typography className={classes.marginUp}>{t.AmazonCares}</Typography>
             </a>
             <a
               href="https://www.amazon.in/gp/browse.html?node=4594605031"
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>Gift a Smile</Typography>
+              <Typography className={classes.marginUp}>{t.GiftaSmile}</Typography>
             </a>
             <a
               href="https://www.amazon.science/"
@@ -207,37 +210,37 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Amazon Science
+                {t.AmazonScience}
               </Typography>
             </a>
           </Box>
           <div className={classes.childDiv}>
-            <Typography className={classes.heading}>Connect with Us</Typography>
+            <Typography className={classes.heading}>{t.ConnectwithUs}</Typography>
             <a
               href="https://www.facebook.com/AmazonIN"
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>Facebook</Typography>
+              <Typography className={classes.marginUp}>{t.Facebook}</Typography>
             </a>
             <a
               href="https://twitter.com/AmazonIN"
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>Twitter</Typography>
+              <Typography className={classes.marginUp}>{t.Twitter}</Typography>
             </a>
             <a
               href="https://www.instagram.com/amazondotin/"
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>Instagram</Typography>
+              <Typography className={classes.marginUp}>{t.Instagram}</Typography>
             </a>
           </div>
           <div className={classes.childDivException}>
             <Typography className={classes.heading}>
-              Make Money with Us
+              {t.MakeMoneywithUs}
             </Typography>
             <a
               href="https://www.amazon.in/b/?node=2838698031"
@@ -245,7 +248,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Sell on Amazon
+                {t.SellonAmazon}
               </Typography>
             </a>
             <a
@@ -254,7 +257,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Sell under Amazon Accelerator
+                {t.SellunderAmazonAccelerator}
               </Typography>
             </a>
             <a
@@ -263,7 +266,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Amazon Global Selling
+                {t.AmazonGlobalSelling}
               </Typography>
             </a>
             <a
@@ -272,7 +275,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Become an Affiliate
+                {t.BecomeanAffiliate}
               </Typography>
             </a>
             <a
@@ -281,7 +284,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Fulfilment by Amazon
+                {t.FulfilmentbyAmazon}
               </Typography>
             </a>
             <a
@@ -290,7 +293,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Advertise Your Products
+                Advertise Your Products{t.AdvertiseYourProducts}
               </Typography>
             </a>
             <a
@@ -299,19 +302,19 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Amazon Pay on Merchants
+               {t.AmazonPayonMerchants}
               </Typography>
             </a>
           </div>
           <div className={classes.childDivException}>
-            <Typography className={classes.heading}>Let Us Help You</Typography>
+            <Typography className={classes.heading}>{t.LetUsHelpYou}</Typography>
             <a
               href="https://www.amazon.in/gp/help/customer/display.html?nodeId=GDFU3JS5AL6SYHRD"
               target="blank"
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                COVID-19 and Amazon
+                {t.COVIDandAmazon}
               </Typography>
             </a>
             <a
@@ -319,7 +322,7 @@ function Footer() {
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>Your Account</Typography>
+              <Typography className={classes.marginUp}>{t.YourAccount}</Typography>
             </a>
             <a
               href="https://www.amazon.in/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.in%2Fyour-account%3Fref_%3Dnav_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=inflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&"
@@ -327,7 +330,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Returns Centre
+                {t.ReturnsCentre}
               </Typography>
             </a>
             <a
@@ -336,7 +339,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                100% Purchase Protection
+              {t.PurchaseProtection}
               </Typography>
             </a>
             <a
@@ -345,7 +348,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Amazon App Download
+                {t.AmazonAppDownload}
               </Typography>
             </a>
             <a
@@ -354,7 +357,7 @@ function Footer() {
               className={classes.link}
             >
               <Typography className={classes.marginUp}>
-                Amazon Assistant Download
+                {t.AmazonAssistantDownload}
               </Typography>
             </a>
             <a
@@ -362,7 +365,7 @@ function Footer() {
               target="blank"
               className={classes.link}
             >
-              <Typography className={classes.marginUp}>Help</Typography>
+              <Typography className={classes.marginUp}>{t.help}</Typography>
             </a>
           </div>
         </Box>
@@ -398,7 +401,7 @@ function Footer() {
                 }}
               >
                 <BsGlobe />
-                <Typography className={classes.text}>English</Typography>
+                <Typography className={classes.text}>{t.English}</Typography>
                 <TiArrowUnsorted />
               </div>
             </Popover>
@@ -410,63 +413,63 @@ function Footer() {
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Australia</Typography>
+                <Typography className={classes.linkText}>{t.Australia}</Typography>
               </a>
               <a
                 href="https://www.amazon.com.br/"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Brazil</Typography>
+                <Typography className={classes.linkText}>{t.Brazil}</Typography>
               </a>
               <a
                 href="https://www.amazon.ca/"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Canada</Typography>
+                <Typography className={classes.linkText}>{t.Canada}</Typography>
               </a>
               <a
                 href="https://www.amazon.cn/"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>China</Typography>
+                <Typography className={classes.linkText}>{t.china}</Typography>
               </a>
               <a
                 href="https://www.amazon.fr"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>France</Typography>
+                <Typography className={classes.linkText}>{t.France}</Typography>
               </a>
               <a
                 href="https://www.amazon.de"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Germany</Typography>
+                <Typography className={classes.linkText}>{t.Germany}</Typography>
               </a>
               <a
                 href="https://www.amazon.it"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Italy</Typography>
+                <Typography className={classes.linkText}>{t.Italy}</Typography>
               </a>
               <a
                 href="https://www.amazon.co.jp"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Japan</Typography>
+                <Typography className={classes.linkText}>Japan{t.Japan}</Typography>
               </a>
               <a
                 href="https://www.amazon.com.mx"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Mexico</Typography>
+                <Typography className={classes.linkText}>{t.Mexico}</Typography>
               </a>
               <a
                 href="https://www.amazon.nl"
@@ -474,7 +477,7 @@ function Footer() {
                 className={classes.link}
               >
                 <Typography className={classes.linkText}>
-                  Netherlands
+                  {t.Netherlands}
                 </Typography>
               </a>
               <a
@@ -482,28 +485,28 @@ function Footer() {
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Poland</Typography>
+                <Typography className={classes.linkText}>{t.Poland}</Typography>
               </a>
               <a
                 href="https://www.amazon.sg"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Singapore</Typography>
+                <Typography className={classes.linkText}>{t.Singapore}</Typography>
               </a>
               <a
                 href="https://www.amazon.es"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Spain</Typography>
+                <Typography className={classes.linkText}>{t.Spain}</Typography>
               </a>
               <a
                 href="https://www.amazon.com.tr"
                 target="blank"
                 className={classes.link}
               >
-                <Typography className={classes.linkText}>Turkey</Typography>
+                <Typography className={classes.linkText}>{t.Turkey}</Typography>
               </a>
               <a
                 href="https://www.amazon.ae"
@@ -511,7 +514,7 @@ function Footer() {
                 className={classes.link}
               >
                 <Typography className={classes.linkTextCustom1}>
-                  United Arab Emirates
+                  {t.UnitedArabEmirates}
                 </Typography>
               </a>
             </div>
@@ -523,7 +526,7 @@ function Footer() {
                 className={classes.link}
               >
                 <Typography className={classes.linkTextCustom}>
-                  United Kingdom
+                  {t.UnitedKingdom}
                 </Typography>
               </a>
               <a
@@ -532,7 +535,7 @@ function Footer() {
                 className={classes.link}
               >
                 <Typography className={classes.linkTextCustom}>
-                  United States
+                  {t.UnitedStates}
                 </Typography>
               </a>
             </div>
