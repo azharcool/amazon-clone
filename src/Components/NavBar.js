@@ -319,7 +319,6 @@ function NavBar() {
                   <Search className={classes.mSearchIcon} />
                 </Button>
               </div>
-              
 
               <Link to="/Cart" className={classes.scart}>
                 <div className={classes.header_cart}>
@@ -328,10 +327,8 @@ function NavBar() {
                 </div>
                 {t.cart}
               </Link>
-             
-              <DrawerComp
-                
-              />
+
+              <DrawerComp />
             </>
           ) : (
             <>
@@ -346,7 +343,9 @@ function NavBar() {
                   />
                 </div>
                 <div>
-                  <Typography className={classes.text}>{t.hello} {name}</Typography>
+                  <Typography className={classes.text}>
+                    {t.hello} {name}
+                  </Typography>
                   <Typography className={classes.text2}>
                     {t.selectYourAddress}
                   </Typography>
@@ -363,68 +362,76 @@ function NavBar() {
                 <Typography className={classes.text}>{getLanguage}</Typography>
                 <Typography className={classes.flagDiv}>
                   <ReactCountryFlag
-                  countryCode={languageIcons[getLanguage]}
+                    countryCode={languageIcons[getLanguage]}
                     svg
                     className={classes.flag}
                   />
                   <AiOutlineCaretDown className={classes.downIcon} />
                 </Typography>
                 <Popper id={id} open={openPopper} anchorEl={anchorEl}>
-              <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
-                <List>
-                  <ListItem disablePadding>
-                    <ListItemButton onClick={() => handleLanguage("English")}>
-                      <ReactCountryFlag
-                        countryCode="IN"
-                        svg
-                        className={classes.flag}
-                      />
-                      <ListItemText
-                        primary="English"
-                        sx={{
-                          padding: "0 5px",
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton onClick={() => handleLanguage("Chinese")}>
-                      <ReactCountryFlag
-                        countryCode="CN"
-                        svg
-                        className={classes.flag}
-                      />
-                      <ListItemText
-                        primary="Chinese"
-                        sx={{
-                          padding: "0 5px",
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton onClick={() => handleLanguage("Vietnam")}>
-                      <ReactCountryFlag
-                        countryCode="VN"
-                        svg
-                        className={classes.flag}
-                      />
-                      <ListItemText
-                        primary="Vietnam"
-                        sx={{
-                          padding: "0 5px",
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                </List>
-              </Box>
-            </Popper>
+                  <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+                    <List>
+                      <ListItem disablePadding>
+                        <ListItemButton
+                          onClick={() => handleLanguage("English")}
+                        >
+                          <ReactCountryFlag
+                            countryCode="IN"
+                            svg
+                            className={classes.flag}
+                          />
+                          <ListItemText
+                            primary="English"
+                            sx={{
+                              padding: "0 5px",
+                            }}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton
+                          onClick={() => handleLanguage("Chinese")}
+                        >
+                          <ReactCountryFlag
+                            countryCode="CN"
+                            svg
+                            className={classes.flag}
+                          />
+                          <ListItemText
+                            primary="Chinese"
+                            sx={{
+                              padding: "0 5px",
+                            }}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton
+                          onClick={() => handleLanguage("Vietnam")}
+                        >
+                          <ReactCountryFlag
+                            countryCode="VN"
+                            svg
+                            className={classes.flag}
+                          />
+                          <ListItemText
+                            primary="Vietnam"
+                            sx={{
+                              padding: "0 5px",
+                            }}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    </List>
+                  </Box>
+                </Popper>
               </div>
 
               {name ? (
                 <div className={classes.headerButton} onClick={onSignOut}>
-                  <Typography className={classes.text}>{t.hello} {name}</Typography>
+                  <Typography className={classes.text}>
+                    {t.hello} {name}
+                  </Typography>
                   <Typography className={classes.text2}>{t.signOut}</Typography>
                 </div>
               ) : (
@@ -440,7 +447,7 @@ function NavBar() {
                       }}
                       className={classes.text}
                     >
-                    {t.helloGuest}
+                      {t.helloGuest}
                     </Typography>
                     <Typography
                       sx={{
