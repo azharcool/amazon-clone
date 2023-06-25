@@ -26,31 +26,49 @@ import SetLanguageAction from "./../Actions/SetLanguageAction";
 import ListItem from "@mui/material/ListItem";
 import ReactCountryFlag from "react-country-flag";
 import { AiOutlineCaretDown } from "react-icons/ai";
+import Toolbar from "@mui/material/Toolbar";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 const useStyles = makeStyles({
-  header: {
-    top: "0",
-    height: "8rem",
-    width: "18rem",
-    backgroundColor: "#131921",
-    color: "white",
-    display: "flex",
-    justifyContent: "right",
-    marginLeft: "-2.3rem",
-    marginTop: "-2.1rem",
-    marginRight: "-2.1rem",
-    paddingTop: "2rem",
-    paddingRight: "2rem",
-  },
+  // header: {
+  //   top: "0",
+  //   height: "8rem",
+  //   width: "18rem",
+  //   backgroundColor: "#131921",
+  //   color: "white",
+  //   display: "flex",
+  //   justifyContent: "right",
+  //   marginLeft: "-2.3rem",
+  //   marginTop: "-2.1rem",
+  //   marginRight: "-2.1rem",
+  //   paddingTop: "2rem",
+  //   paddingRight: "2rem",
+  // },
   divider: {
     marginLeft: "-2rem",
     marginRight: "-2.1rem",
   },
-  close:{
+  close: {
     display: "flex",
-    
-  }
-  
+  },
+  header: {
+    backgroundColor: "#131921",
+    padding: "2rem 1rem",
+    minHeight: "5rem",
+  },
+  closeIcon: {
+    height: "24px",
+  },
+  text: {
+    color: "#fff",
+  },
 });
 const languageIcons = {
   English: "IN",
@@ -59,7 +77,7 @@ const languageIcons = {
 };
 const DrawerComp = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const navigate = useNavigate();
   const name = useSelector((state) => state.user.displayName);
   const dispatch = useDispatch();
   const cartCount = useSelector((state) => state.cart.count);
@@ -67,6 +85,7 @@ const DrawerComp = () => {
   const getLanguage = useSelector((state) => state.language.lang);
 
   const t = translations.get(getLanguage);
+
   const classes = useStyles();
   const initialUserState = {
     uid: "",
@@ -121,182 +140,141 @@ const DrawerComp = () => {
   };
 
   return (
-    <div>
+    <>
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <List>
-          <ListItemButton>
-            <ListItemIcon style={{ display: "flex", flexDirection: "column" }}>
-              <ListItemText className={classes.header}>
-               <div  className={classes.close}> 
-              <Button
-                  style={iconStyles}
-                 
-                  onClick={handleClose}
-                >
-                  &#10006;
-                </Button>
-                </div>
+        <Box
+          sx={{
+            width: "256px",
+            minHeight: "100vh",
+          }}
+        >
+          <Stack
+            sx={{
+              backgroundColor: "#131921",
+              padding: "2rem 1rem",
+              minHeight: "5rem",
+            }}
+            direction="row"
+            justifyContent="space-between"
+          >
+            <IconButton
+              onClick={handleClose}
+              size="small"
+              disableRipple
+              className={classes.closeIcon}
+            >
+              <CloseRoundedIcon
+                sx={{
+                  color: "#fff",
+                }}
+              />
+            </IconButton>
 
-                <IoPersonCircleSharp
-                  style={{
-                    height: "2rem",
-                    width: "2rem",
-                    // marginLeft: "1.5rem",
-                  }}
+            <Stack>
+              <IoPersonCircleSharp
+                style={{
+                  height: "2rem",
+                  width: "2rem",
+                  color: "#fff",
+                  // marginLeft: "1.5rem",
+                }}
+              />
+              <Typography
+                sx={{
+                  fontSize: {
+                    sm: "3rem",
+                    md: "1rem",
+                    lg: "0.6rem",
+                    xl: "0.7rem",
+                  },
+                }}
+                className={classes.text}
+              >
+                {name ? `${t.hello} ${name}` : t.helloGuest}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: {
+                    md: "0.7rem",
+                    lg: "0.8rem",
+                  },
+                }}
+                className={classes.text}
+                onClick={() => {
+                  if (name) {
+                    onSignOut();
+                  } else {
+                    navigate("/Login");
+                  }
+                }}
+              >
+                {name ? t.signOut : t.signIn}
+              </Typography>
+            </Stack>
+          </Stack>
+
+          <Stack
+            sx={{
+              padding: "1rem 2rem",
+            }}
+          >
+            <HiOutlineLocationMarker
+              style={{ color: "black" }}
+              size="1.15rem"
+              className={classes.icon}
+            />
+            <Typography>
+              {t.hello} {name}
+            </Typography>
+            <Typography>{t.selectYourAddress}</Typography>
+          </Stack>
+
+          <Divider />
+
+          <Stack
+            sx={{
+              padding: "1rem",
+            }}
+          >
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">
+                Language
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="female"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel
+                  value="IN"
+                  control={<Radio />}
+                  label="English"
+                  onChange={() => handleLanguage("English")}
+                  checked={"English" === getLanguage}
                 />
-
-                {name ? (
-                  <div className={classes.headerButton} onClick={onSignOut}>
-                    <Typography className={classes.text}>
-                      {t.hello} {name}
-                    </Typography>
-                    <Typography className={classes.text2}>
-                      {t.signOut}
-                    </Typography>
-                  </div>
-                ) : (
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: "white",
-                      paddingTop: "3rem",
-                    }}
-                    to="/Login"
-                    className={classes.linkBtn}
-                  >
-                    <div className={classes.headerButton}>
-                      <Typography
-                        sx={{
-                          fontSize: {
-                            sm: "3rem",
-                            md: "1rem",
-                            lg: "0.6rem",
-                            xl: "0.7rem",
-                          },
-                        }}
-                        className={classes.text}
-                      >
-                        {t.helloGuest}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontSize: {
-                            md: "0.7rem",
-                            lg: "0.8rem",
-                          },
-                        }}
-                        className={classes.text2}
-                      >
-                        {t.signIn}
-                      </Typography>
-                    </div>
-                  </Link>
-                )}
-              </ListItemText>
-              <ListItemText>
-                <Divider className={classes.divider} />
-                <div
-                  className={classes.location}
-                  onClick={() => alert("Clicked")}
-                >
-                  <div>
-                    <HiOutlineLocationMarker
-                      style={{ color: "black" }}
-                      size="1.15rem"
-                      className={classes.icon}
-                    />
-                  </div>
-                  <div>
-                    <Typography className={classes.text}>
-                      {t.hello} {name}
-                    </Typography>
-                    <Typography className={classes.text2}>
-                      {t.selectYourAddress}
-                    </Typography>
-                  </div>
-                </div>
-                <Divider className={classes.divider} />
-              </ListItemText>
-              <ListItemText>
-                <div className={classes.headerButton} onClick={handleClick}>
-                  <Typography className={classes.text}>
-                    {getLanguage}
-                  </Typography>
-                  <Typography className={classes.flagDiv}>
-                    <ReactCountryFlag
-                      countryCode={languageIcons[getLanguage]}
-                      svg
-                      className={classes.flag}
-                    />
-                    <AiOutlineCaretDown className={classes.downIcon} />
-                  </Typography>
-                  <Popper id={id} open={openPopper} anchorEl={anchorEl}>
-                    <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
-                      <List>
-                        <ListItem disablePadding>
-                          <ListItemButton
-                            onClick={() => handleLanguage("English")}
-                          >
-                            <ReactCountryFlag
-                              countryCode="IN"
-                              svg
-                              className={classes.flag}
-                            />
-                            <ListItemText
-                              primary="English"
-                              sx={{
-                                padding: "0 5px",
-                              }}
-                            />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton
-                            onClick={() => handleLanguage("Chinese")}
-                          >
-                            <ReactCountryFlag
-                              countryCode="CN"
-                              svg
-                              className={classes.flag}
-                            />
-                            <ListItemText
-                              primary="Chinese"
-                              sx={{
-                                padding: "0 5px",
-                              }}
-                            />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton
-                            onClick={() => handleLanguage("Vietnam")}
-                          >
-                            <ReactCountryFlag
-                              countryCode="VN"
-                              svg
-                              className={classes.flag}
-                            />
-                            <ListItemText
-                              primary="Vietnam"
-                              sx={{
-                                padding: "0 5px",
-                              }}
-                            />
-                          </ListItemButton>
-                        </ListItem>
-                      </List>
-                    </Box>
-                  </Popper>
-                </div>
-              </ListItemText>
-            </ListItemIcon>
-          </ListItemButton>
-        </List>
+                <FormControlLabel
+                  value="VN"
+                  control={<Radio />}
+                  label="Vietnam"
+                  onChange={() => handleLanguage("Vietnam")}
+                  checked={"Vietnam" === getLanguage}
+                />
+                <FormControlLabel
+                  value="CN"
+                  control={<Radio />}
+                  label="Chinese"
+                  onChange={() => handleLanguage("Chinese")}
+                  checked={"Chinese" === getLanguage}
+                />
+              </RadioGroup>
+            </FormControl>
+          </Stack>
+        </Box>
       </Drawer>
       <IconButton onClick={() => setOpen(!open)}>
         <RiMenuLine style={iconStyles} />
       </IconButton>
-    </div>
+    </>
   );
 };
 

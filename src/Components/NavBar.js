@@ -330,11 +330,7 @@ function NavBar() {
               </Link>
              
               <DrawerComp
-                style={{
-                  display: "flex",
-                  justifyContent: "right",
-                  alignItems: "right",
-                }}
+                
               />
             </>
           ) : (
